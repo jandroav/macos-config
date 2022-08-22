@@ -1,0 +1,70 @@
+{
+  "title": "Keychron K2 Spanish",
+  "rules": [
+    {
+      "description": "Accents using quote (') key",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "quote"
+          },
+          "to": [
+            {
+              "key_code": "e",
+              "modifiers": ["left_option"]
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "quote",
+            "modifiers": {
+              "mandatory": ["fn"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "quote"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    },
+    {
+      "description": "ñ using semicolon (;) key",
+      "manipulators": [
+        {
+          "from": {
+            "key_code": "semicolon"
+          },
+          "to": [
+            {
+              "key_code": "n",
+              "modifiers": ["left_option"]
+            },
+            {
+              "key_code": "n"
+            }
+          ],
+          "type": "basic"
+        },
+        {
+          "from": {
+            "key_code": "semicolon",
+            "modifiers": {
+              "mandatory": ["fn"]
+            }
+          },
+          "to": [
+            {
+              "key_code": "semicolon"
+            }
+          ],
+          "type": "basic"
+        }
+      ]
+    }
+  ]
+}
