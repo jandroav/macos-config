@@ -1,12 +1,9 @@
 # My macOS configs
 
-Here you could find my [fish shell](https://fishshell.com) configuration, [kitty terminal](https://sw.kovidgoyal.net/kitty/) configuration and my current macOS apps, brew packages and vscode extensions.
+Here you could find my `zsh` configuration (with [starship](https://starship.rs/) prompt), [wezterm terminal](https://wezfurlong.org/wezterm/index.html) configuration and my current `macOS` apps, `brew` packages and `vscode` extensions.
 
 Check the following links if you want to get some additional goodies:
 
-* [awsm.fish](https://github.com/jorgebucaran/awsm.fish)
-* [The ultimate Fish prompt](https://github.com/IlanCosman/tide)
-* [My Fish shell workflow for coding](https://www.youtube.com/watch?v=KKxhf50FIPI)
 * [Z](https://github.com/jethrokuan/z)
 * [Exa](https://the.exa.website)
 
@@ -15,53 +12,23 @@ Check the following links if you want to get some additional goodies:
 `ls -1 /Applications/ > apps.txt`
 
 ```
-1Password for Safari.app
-1Password.app
-Adobe Creative Cloud
-Adobe Photoshop 2021
-Amphetamine.app
-Brave Browser.app
-Camera Settings.app
-Configurador FNMT.app
-Discord.app
-Docker.app
-Final Cut Pro.app
-GPG Keychain.app
-Google Chrome.app
-Grammarly for Safari.app
-IntelliJ IDEA CE.app
-Karabiner-Elements.app
-Karabiner-EventViewer.app
-Magnet.app
-Meeter.app
-Microsoft Teams.app
-OBS.app
-OnyX.app
-Pages.app
-Paste.app
-Python 3.7
-Raycast.app
-SF Symbols.app
-Safari.app
+NetNewsWire.app
 Shottr.app
-Skype Meetings App.app
-Slack.app
-Stats.app
-Telegram.app
-The Unarchiver.app
-TrashMe.app
-Tunnelblick.app
-Utilities
-VMware Fusion.app
-VirtualBox.app
-Visual Studio Code.app
-WaveLink.app
-Webex.app
-WhatsApp.app
-draw.io.app
-kitty.app
-obsidian.localized
+Latest.app
+WezTerm.app
+DisplayLink Manager.app
 zoom.us.app
+TrashMe.app
+The Unarchiver.app
+OrbStack.app
+Visual Studio Code.app
+DBeaver.app
+Microsoft Remote Desktop.app
+Brave Browser.app
+Zed.app
+PastePal.app
+Safari.app
+Slack.app
 ```
 
 ## vscode extensions
@@ -69,32 +36,36 @@ zoom.us.app
 `code --list-extensions > vscode_extensions`
 
 ```
-2gua.rainbow-brackets
-aaron-bond.better-comments
-chris-rimmer.liquibase-snippets
-christian-kohler.path-intellisense
-DavidAnson.vscode-markdownlint
+alefragnani.bookmarks
+dracula-theme.theme-dracula
 eamodio.gitlens
-EditorConfig.EditorConfig
-esbenp.prettier-vscode
-formulahendry.auto-close-tag
-formulahendry.auto-rename-tag
-GitHub.copilot
-IBM.output-colorizer
-ipedrazas.kubernetes-snippets
-leodevbro.blockman
+editorconfig.editorconfig
+github.copilot
+github.copilot-chat
+github.vscode-github-actions
+golang.go
+hashicorp.terraform
+ibm.output-colorizer
 ms-azuretools.vscode-docker
-ms-kubernetes-tools.vscode-kubernetes-tools
-oderwat.indent-rainbow
-redhat.vscode-xml
+ms-python.debugpy
+ms-python.python
+ms-python.vscode-pylance
+ms-vscode.makefile-tools
+nicolasvuillamy.vscode-groovy-lint
+redhat.java
 redhat.vscode-yaml
 shakram02.bash-beautify
-Shan.code-settings-sync
-streetsidesoftware.code-spell-checker
+tamasfe.even-better-toml
 timonwong.shellcheck
-voidrot.liquibase
-wayou.vscode-todo-highlight
-wix.vscode-import-cost
+visualstudioexptteam.intellicode-api-usage-examples
+visualstudioexptteam.vscodeintellicode
+vscjava.vscode-gradle
+vscjava.vscode-java-debug
+vscjava.vscode-java-dependency
+vscjava.vscode-java-pack
+vscjava.vscode-java-test
+vscjava.vscode-maven
+vscode-icons-team.vscode-icons
 yzhang.markdown-all-in-one
 ```
 

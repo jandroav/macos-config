@@ -1,47 +1,17 @@
-1Password for Safari.app
-1Password.app
-Adobe Creative Cloud
-Adobe Photoshop 2021
-Amphetamine.app
-Brave Browser.app
-Camera Settings.app
-Configurador FNMT.app
-Discord.app
-Docker.app
-Final Cut Pro.app
-GPG Keychain.app
-Google Chrome.app
-Grammarly for Safari.app
-IntelliJ IDEA CE.app
-Karabiner-Elements.app
-Karabiner-EventViewer.app
-Magnet.app
-Meeter.app
-Microsoft Teams.app
-OBS.app
-OnyX.app
-Pages.app
-Paste.app
-Python 3.7
-Raycast.app
-SF Symbols.app
-Safari.app
+NetNewsWire.app
 Shottr.app
-Skype Meetings App.app
-Slack.app
-Stats.app
-Telegram.app
-The Unarchiver.app
-TrashMe.app
-Tunnelblick.app
-Utilities
-VMware Fusion.app
-VirtualBox.app
-Visual Studio Code.app
-WaveLink.app
-Webex.app
-WhatsApp.app
-draw.io.app
-kitty.app
-obsidian.localized
+Latest.app
+WezTerm.app
+DisplayLink Manager.app
 zoom.us.app
+TrashMe.app
+The Unarchiver.app
+OrbStack.app
+Visual Studio Code.app
+DBeaver.app
+Microsoft Remote Desktop.app
+Brave Browser.app
+Zed.app
+PastePal.app
+Safari.app
+Slack.app
