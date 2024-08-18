@@ -12,6 +12,11 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
+-- General configurations
+config.window_close_confirmation = "NeverPrompt"
+config.automatically_reload_config = true
+config.default_cursor_style = "BlinkingBlock"
+
 -- Disable dead keys - https://en.wikipedia.org/wiki/Dead_key
 config.use_dead_keys = false
 
