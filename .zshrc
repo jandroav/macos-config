@@ -2,7 +2,7 @@ export PATH="/opt/homebrew/opt/ruby@3.1/bin:$PATH"
 GEMSDIR=$(gem environment gemdir)/bin
 PATH=$GEMSDIR:$PATH
 export PATH
-alias ls='ls -ltra'
+alias ls='exa -lra'
 alias c='clear'
 alias h='history'
 alias ga='git add .'
@@ -28,7 +28,6 @@ eval "$(zoxide init zsh)"
 export MAVEN_HOME="/Users/jandroav/.sdkman/candidates/maven/3.9.8/bin"
 export PATH="$MAVEN_HOME:{$PATH}"
 export PATH="/opt/homebrew/opt/gnu-getopt/bin:$PATH"
-export EDITOR="zed"
 
 eval "$(starship init zsh)"
 
