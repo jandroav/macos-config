@@ -62,23 +62,24 @@ Check the following links if you want to get some additional goodies:
 `ls -1 /Applications/ > apps.txt`
 
 ```
-NetNewsWire.app
-Shottr.app
-Latest.app
-WezTerm.app
-DisplayLink Manager.app
 zoom.us.app
+Wipr.app
+Visual Studio Code.app
+Tuta Mail.app
 TrashMe.app
 The Unarchiver.app
-OrbStack.app
-Visual Studio Code.app
-DBeaver.app
-Microsoft Remote Desktop.app
-Brave Browser.app
-Zed.app
-PastePal.app
-Safari.app
 Slack.app
+Shottr.app
+Safari.app
+PastePal.app
+OrbStack.app
+OnyX.app
+NetNewsWire.app
+Microsoft Remote Desktop.app
+Latest.app
+DisplayLink Manager.app
+DBeaver.app
+Bitwarden.app
 ```
 
 ## :beers: brew packages
