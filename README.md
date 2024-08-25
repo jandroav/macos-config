@@ -88,10 +88,7 @@ Slack.app
 ```
 ==> Formulae
 awscli
-cmake
-cryptography
 fontconfig
-gcc
 gh
 gnupg
 gnutls
@@ -117,7 +114,6 @@ terraformer
 upx
 webp
 xz
-z3
 zoxide
 zsh-autosuggestions
 zsh-history-substring-search
