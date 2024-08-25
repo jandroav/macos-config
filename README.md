@@ -1,13 +1,63 @@
-# My macOS configs
+# :green_apple: My macOS configs
 
-Here you could find my `zsh` configuration (with [starship](https://starship.rs/) prompt), [wezterm terminal](https://wezfurlong.org/wezterm/index.html) configuration and my current `macOS` apps, `brew` packages and `vscode` extensions.
+Welcome to my `macOS` terminal configuration repository. This setup is optimized for performance and security by leveraging as many built-in `macOS` applications as possible.
+
+## :grey_exclamation: Overview
+
+This repository includes my configuration files for `oh-my-zsh`, as well as a list of my current `macOS` applications, `brew` packages, and `vscode` extensions. The configuration is tailored for the `macOS` built-in terminal emulator, using `zsh` as the default shell and is enhanced with the powerful `oh-my-zsh` framework.
+
+## :nail_care: Theme
+
+I am using the [Powerlevel10k - Dracula](https://draculatheme.com/powerlevel10k) theme for a sleek, modern look with informative prompts.
+
+## :eyes: Why Stick with Built-in macOS Apps?
+
+### :zap: Performance
+
+By sticking to `macOS`'s built-in applications, we avoid the overhead that comes with installing and running additional third-party software. Apple’s apps are optimized for `macOS` and typically offer better performance, lower memory usage, and faster updates, especially on Apple Silicon devices.
+
+### :lock: Security
+
+Built-in `macOS` apps are tightly integrated with the operating system’s security features. This reduces the risk of vulnerabilities that may be introduced by third-party applications. Apple's continuous security updates further ensure that these apps are always up to date with the latest protections.
+
+## :wrench: Included Configurations
+
+- **Zsh Configuration (`.zshrc`)**: My customized `zsh` setup with aliases, functions, and plugins for enhanced productivity.
+- **.p10k.zsh**: [Powerlevel10k - Dracula](https://draculatheme.com/powerlevel10k) theme configuration file.
+- **Brew Packages**: A list of essential packages installed via Homebrew.
+- **macOS Applications**: A curated list of macOS applications that I use, focused on performance and security.
+- **VSCode Extensions**: A collection of my most-used Visual Studio Code extensions to streamline development.
+
+## :white_check_mark: Getting Started
+
+### 1. Install `oh-my-zsh`
+
+First, you need to install `oh-my-zsh`: https://ohmyz.sh/#install
+
+### 2. Copy the Configuration Files
+
+```bash
+git clone https://github.com/jandroav/macos-config.git
+cd macOS-terminal-config
+cp .zshrc ~/
+cp .p10k.zsh ~/
+```
+
+### 3. Install packages and extension (Optional)
+
+```bash
+sh install_packages_extensions.sh
+```
+
+## :dango: Additional goodies
 
 Check the following links if you want to get some additional goodies:
 
 * [Z](https://github.com/jethrokuan/z)
 * [Exa](https://the.exa.website)
+* [opencommit](https://github.com/di-sukharev/opencommit)
 
-## Applications
+## :floppy_disk: Applications
 
 `ls -1 /Applications/ > apps.txt`
 
@@ -31,7 +81,56 @@ Safari.app
 Slack.app
 ```
 
-## vscode extensions
+## :beers: brew packages
+
+`brew list -1 > brew_packages`
+
+```
+==> Formulae
+awscli
+cmake
+cryptography
+fontconfig
+gcc
+gh
+gnupg
+gnutls
+go
+helm
+icu4c
+inframap
+kubectx
+kubernetes-cli
+minikube
+mongosh
+node
+openssl@3
+pulumi
+pygments
+python-setuptools
+python@3.12
+spacectl
+sqlite
+terraform
+terraform-docs
+terraformer
+upx
+webp
+xz
+z3
+zoxide
+zsh-autosuggestions
+zsh-history-substring-search
+zsh-syntax-highlighting
+
+==> Casks
+dbeaver-community
+google-cloud-sdk
+latest
+orbstack
+```
+
+## :nut_and_bolt: vscode extensions
 
 `code --list-extensions > vscode_extensions`
 
@@ -68,209 +167,3 @@ vscjava.vscode-maven
 vscode-icons-team.vscode-icons
 yzhang.markdown-all-in-one
 ```
-
-## Brew packages
- 
-`brew list > brew_packages.txt`
-
-```
-om
-augeas
-aws-iam-authenticator
-bash
-bash-completion@2
-bat
-bdw-gc
-berkeley-db
-brotli
-btop
-c-ares
-ca-certificates
-cairo
-certbot
-cjson
-cmake
-cmocka
-coreutils
-curl
-dav1d
-ddev
-dialog
-docker-machine
-docker-machine-driver-vmware
-eksctl
-exa
-fasd
-fd
-ffmpeg
-fish
-flac
-fontconfig
-freetype
-frei0r
-fribidi
-fzf
-gawk
-gcc
-gdbm
-gettext
-gh
-giflib
-gifsicle
-git
-git-secrets
-gitea
-glib
-gmp
-gnupg
-gnutls
-go
-gobject-introspection
-graphite2
-grip
-guile
-harfbuzz
-helm
-hyperkit
-icu4c
-imath
-isl
-jemalloc
-jenv
-jpeg
-jpeg-turbo
-jpeg-xl
-jq
-k9s
-kubectx
-kubernetes-cli
-lame
-lazygit
-leptonica
-libarchive
-libass
-libassuan
-libb2
-libbluray
-libev
-libevent
-libffi
-libgcrypt
-libgpg-error
-libidn2
-libksba
-libmpc
-libnghttp2
-libogg
-libpng
-libpthread-stubs
-librist
-libsamplerate
-libsndfile
-libsodium
-libsoxr
-libssh2
-libtasn1
-libtermkey
-libtiff
-libtool
-libunistring
-libusb
-libuv
-libvidstab
-libvmaf
-libvorbis
-libvpx
-libx11
-libxau
-libxcb
-libxdmcp
-libxext
-libxrender
-little-cms2
-lua
-luajit
-luarocks
-luv
-lz4
-lzo
-m4
-make
-mbedtls
-md5sha1sum
-minikube
-mkcert
-mpdecimal
-mpfr
-msgpack
-ncurses
-neovim
-nettle
-newt
-nghttp2
-node
-npth
-nspr
-nss
-oniguruma
-opencore-amr
-openexr
-openjdk
-openjdk@11
-openjdk@8
-openjpeg
-openldap
-openssl@1.1
-openssl@3
-opus
-p11-kit
-pcre
-pcre2
-pinentry
-pixman
-pkg-config
-popt
-python-yq
-python@3.10
-python@3.9
-rav1e
-readline
-ripgrep
-rtmpdump
-rubberband
-s-lang
-sdl2
-six
-snappy
-speex
-sqlite
-srt
-tektoncd-cli
-terraform
-tesseract
-the_silver_searcher
-theora
-tmux
-tree-sitter
-unbound
-unibilium
-utf8proc
-webp
-wget
-x264
-x265
-xorgproto
-xvid
-xz
-zeromq
-zimg
-zsh
-zsh-syntax-highlighting
-zstd
-raycast
-stats
-virtualbox
-vscodium
-```
-
-
