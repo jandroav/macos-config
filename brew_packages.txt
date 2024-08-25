@@ -1,5 +1,12 @@
 awscli
+<<<<<<< HEAD
 fontconfig
+=======
+cmake
+cryptography
+fontconfig
+gcc
+>>>>>>> a71d462 (update configs)
 gh
 gnupg
 gnutls
@@ -25,6 +32,7 @@ terraformer
 upx
 webp
 xz
+z3
 zoxide
 zsh-autosuggestions
 zsh-history-substring-search
