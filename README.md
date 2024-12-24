@@ -1,7 +1,5 @@
 # :green_apple: My macOS configs
 
-Welcome to my `macOS` terminal configuration repository. This setup is optimized for performance and security by leveraging as many built-in `macOS` applications as possible.
-
 ## :grey_exclamation: Overview
 
 This repository includes my configuration files for `oh-my-zsh`, as well as a list of my current `macOS` applications, `brew` packages, and `vscode` extensions. The configuration is tailored for the `macOS` built-in terminal emulator, using `zsh` as the default shell and is enhanced with the powerful `oh-my-zsh` framework.
