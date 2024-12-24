@@ -16,7 +16,7 @@ I chose Firefox for my DevOps work because it offers unique features that align 
 
 Additionally, Firefox enables better personalization through support for plain `CSS` customization. This means I can tweak the browser’s appearance to match my preferences or create custom styles that improve productivity, especially when dealing with dashboards or text-heavy interfaces. These features combine to make Firefox an invaluable tool for my DevOps tasks, offering both functional flexibility and a personalized experience.
 
-![firefox](./doc/img/firefox.png)
+![firefox](firefox.png)
 
 ## :wrench: Included Configurations
 
