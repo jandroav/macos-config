@@ -10,13 +10,13 @@ I am using the [Powerlevel10k - Dracula](https://draculatheme.com/powerlevel10k)
 
 ## :eyes: Why Stick with Built-in macOS Apps?
 
-### :zap: Performance
+## Firefox browser
 
-By sticking to `macOS`'s built-in applications, we avoid the overhead that comes with installing and running additional third-party software. Apple’s apps are optimized for `macOS` and typically offer better performance, lower memory usage, and faster updates, especially on Apple Silicon devices.
+I chose Firefox for my DevOps work because it offers unique features that align perfectly with the demands of my workflow. One standout feature is its `multi-container` capability. This allows me to isolate contexts into specific containers, making it easy to manage multiple AWS accounts simultaneously. For example, I can have several `AWS` accounts open in the same browser window, each in its own tab, without cross-contamination of cookies or sessions.
 
-### :lock: Security
+Additionally, Firefox enables better personalization through support for plain `CSS` customization. This means I can tweak the browser’s appearance to match my preferences or create custom styles that improve productivity, especially when dealing with dashboards or text-heavy interfaces. These features combine to make Firefox an invaluable tool for my DevOps tasks, offering both functional flexibility and a personalized experience.
 
-Built-in `macOS` apps are tightly integrated with the operating system’s security features. This reduces the risk of vulnerabilities that may be introduced by third-party applications. Apple's continuous security updates further ensure that these apps are always up to date with the latest protections.
+![firefox](./doc/img/firefox.png)
 
 ## :wrench: Included Configurations
 
