@@ -1,67 +1,28 @@
-# Instant prompt configuration for Powerlevel10k
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# Oh My Zsh configuration
+# Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="powerlevel10k/powerlevel10k"
-plugins=(
-  aws
-  azure
-  colorize
-  command-not-found
-  docker
-  gcloud
-  gh
-  git
-  git-prompt
-  golang
-  gpg-agent
-  helm
-  jira
-  keychain
-  kubectl
-  kubectx
-  minikube
-  mvn
-  npm
-  pip
-  python
-  ssh
-  ssh-agent
-  terraform
-  vscode
-  zsh-history-substring-search
-)
 
-# Keychain plugin configuration
-zstyle :omz:plugins:keychain agents gpg,ssh
+# Which plugins would you like to load?
+# Standard plugins can be found in $ZSH/plugins/
+# Custom plugins may be added to $ZSH_CUSTOM/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git terraform aws command-not-found docker gh git-prompt ssh ssh-agent colorize mvn npm python pip golang)
 
-# Prompt configuration
-RPS1='$(kubectx_prompt_info)'  # Right prompt
-PROMPT="$PROMPT"'$(kubectx_prompt_info)'  # Left prompt
-
-# Load Oh My Zsh
 source $ZSH/oh-my-zsh.sh
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 
-# Path configurations
-export PATH="/opt/homebrew/opt/ruby@3.1/bin:$PATH"
-export PATH="$(gem environment gemdir)/bin:$PATH"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="/opt/homebrew/opt/gnu-getopt/bin:$PATH"
-export PATH="$PATH:$(go env GOPATH)/bin"
-export PATH="$PATH:$HOME/.pulumi/bin"
-export MAVEN_HOME="$HOME/.sdkman/candidates/maven/3.9.8/bin"
-export PATH="$MAVEN_HOME:$PATH"
-export CLOUDSDK_HOME="/opt/homebrew/share/google-cloud-sdk"
-
-# SDKMAN configuration
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Aliases
-alias ls='exa -lra'
+alias ls='eza -l'
 alias c='clear'
 alias h='history'
 alias ga='git add .'
@@ -73,15 +34,14 @@ alias gco='git checkout'
 alias gcb='git checkout -b'
 alias gcm='git checkout master'
 alias e='exit'
-alias r='rename_wezterm_title $1'
 alias cat='ccat'
+alias oc='gpl && terraform fmt --recursive && oco'
 
 # Source additional configurations
-[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 eval "$(zoxide init zsh)"
+source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
 # Key bindings for zsh-history-substring-search
 bindkey "$terminfo[kcuu1]" history-substring-search-up
