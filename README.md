@@ -62,24 +62,34 @@ Check the following links if you want to get some additional goodies:
 `ls -1 /Applications/ > apps.txt`
 
 ```
-zoom.us.app
-Wipr.app
-Visual Studio Code.app
-Tuta Mail.app
-TrashMe.app
-The Unarchiver.app
-Slack.app
-Shottr.app
-Safari.app
-PastePal.app
-OrbStack.app
-OnyX.app
-NetNewsWire.app
-Microsoft Remote Desktop.app
-Latest.app
-DisplayLink Manager.app
+ChatGPT.app
 DBeaver.app
-Bitwarden.app
+'DisplayLink Manager.app'
+Firefox.app
+'GPG Keychain.app'
+Hush.app
+Latest.app
+Meeter.app
+Numbers.app
+OnyX.app
+OrbStack.app
+PastePal.app
+'Proton Mail.app'
+'Proton Mail Uninstaller.app'
+Raindrop.io.app
+Raycast.app
+Reeder.app
+'Save to Raindrop.io.app'
+Shottr.app
+Signal.app
+Slack.app
+Stats.app
+TrashMe.app
+Utilities
+'Visual Studio Code.app'
+Wipr.app
+'YubiKey Manager.app'
+zoom.us.app
 ```
 
 ## :beers: brew packages
@@ -88,54 +98,71 @@ Bitwarden.app
 
 ```
 ==> Formulae
+aom
 awscli
-<<<<<<< HEAD
-fontconfig
-=======
-cmake
+brotli
+c-ares
+ca-certificates
+cairo
+ccat
+cffi
+cloud-nuke
 cryptography
+eza
 fontconfig
-gcc
->>>>>>> a71d462 (update configs)
-gh
-gnupg
-gnutls
-go
-helm
-icu4c
-inframap
-kubectx
-kubernetes-cli
-minikube
-mongosh
+freetype
+fribidi
+gd
+gdk-pixbuf
+gettext
+giflib
+glib
+graphite2
+graphviz
+gts
+harfbuzz
+highway
+icu4c@76
+imath
+jasper
+jpeg-turbo
+jpeg-xl
+lz4
+lzo
+m4
+maven
+mpdecimal
+netpbm
 node
+openexr
+openjdk
 openssl@3
-pulumi
-pygments
-python-setuptools
+pango
+pcre2
+pipx
+pixman
+powerlevel10k
+pycparser
+python-packaging
 python@3.12
+python@3.13
+readline
+shellcheck
 spacectl
 sqlite
 terraform
-terraform-docs
-terraformer
-upx
 webp
+xorgproto
 xz
-<<<<<<< HEAD
-=======
-z3
->>>>>>> a71d462 (update configs)
 zoxide
 zsh-autosuggestions
 zsh-history-substring-search
 zsh-syntax-highlighting
+zstd
 
 ==> Casks
-dbeaver-community
-google-cloud-sdk
-latest
 orbstack
+stats
 ```
 
 ## :nut_and_bolt: vscode extensions
@@ -143,35 +170,15 @@ orbstack
 `code --list-extensions > vscode_extensions`
 
 ```
-alefragnani.bookmarks
-dracula-theme.theme-dracula
 eamodio.gitlens
-editorconfig.editorconfig
+esbenp.prettier-vscode
 github.copilot
 github.copilot-chat
 github.vscode-github-actions
-golang.go
 hashicorp.terraform
 ibm.output-colorizer
 ms-azuretools.vscode-docker
-ms-python.debugpy
-ms-python.python
-ms-python.vscode-pylance
-ms-vscode.makefile-tools
-nicolasvuillamy.vscode-groovy-lint
-redhat.java
+ms-kubernetes-tools.vscode-kubernetes-tools
+natqe.reload
 redhat.vscode-yaml
-shakram02.bash-beautify
-tamasfe.even-better-toml
-timonwong.shellcheck
-visualstudioexptteam.intellicode-api-usage-examples
-visualstudioexptteam.vscodeintellicode
-vscjava.vscode-gradle
-vscjava.vscode-java-debug
-vscjava.vscode-java-dependency
-vscjava.vscode-java-pack
-vscjava.vscode-java-test
-vscjava.vscode-maven
-vscode-icons-team.vscode-icons
-yzhang.markdown-all-in-one
 ```
