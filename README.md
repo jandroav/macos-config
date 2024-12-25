@@ -9,7 +9,7 @@ This repository includes several configuration files I use, as well as a list of
 ## :wrench: Configuration files
 
 * [.zshrc](./.zshrc): My customized `zsh` setup with aliases, functions, and plugins for enhanced productivity.
-* [.opencommit](./opencommit): OpenCommit is an open-source command-line interface (CLI) tool designed to enhance the quality of your Git commit messages by leveraging AI language models. By analyzing your code changes, OpenCommit generates concise and informative commit messages, improving the clarity and professionalism of your project’s history.
+* [.opencommit](./.opencommit): OpenCommit is an open-source command-line interface (CLI) tool designed to enhance the quality of your Git commit messages by leveraging AI language models. By analyzing your code changes, OpenCommit generates concise and informative commit messages, improving the clarity and professionalism of your project’s history.
 
 You need to install the following brew packages in order to boost the `zsh` terminal:
 
@@ -19,7 +19,7 @@ You need to install the following brew packages in order to boost the `zsh` term
 
 ## :dango: Recommended apps and packages
 
-### apps
+### :apple: apps
 
 * [Raycast](https://www.raycast.com/): Raycast is a powerful, keyboard-driven productivity tool for macOS that lets users quickly perform tasks, run commands, and manage workflows through an intuitive launcher interface.
 * [Meeter](https://apps.apple.com/de/app/meeter-for-zoom-teams-co/id1510445899?l=en-GB&mt=12): Meeter is a macOS app that centralizes all your calendar events and online meeting links, enabling you to quickly join meetings from various platforms like Zoom, Google Meet, or Microsoft Teams in one click.
@@ -29,7 +29,7 @@ You need to install the following brew packages in order to boost the `zsh` term
 * [Shottr](https://shottr.cc/): Shottr is a macOS screenshot tool designed for speed and precision, offering features like pixel-perfect annotations, OCR for text extraction, scrolling screenshots, and on-the-fly image editing. It is lightweight and caters to developers, designers, and anyone needing advanced screenshot capabilities, while maintaining a user-friendly and minimalistic interface.
 * [Stats](https://github.com/exelban/stats): Provides real-time statistics on your Mac’s hardware and performance. It offers insights into CPU usage, memory, disk activity, network traffic, and battery health. With a clean and simple interface, Stat allows users to monitor system performance, optimize workflows, and troubleshoot issues directly from the menu bar. It’s designed for users who want to keep track of their Mac’s vital statistics in an efficient, non-intrusive way.
 
-## Special mention: Firefox browser
+## :goat: Special mention: Firefox browser
 
 I chose Firefox for my DevOps work because it offers unique features that align perfectly with the demands of my workflow. One standout feature is its `multi-container` capability. This allows me to isolate contexts into specific containers, making it easy to manage multiple AWS accounts simultaneously. For example, I can have several `AWS` accounts open in the same browser window, each in its own tab, without cross-contamination of cookies or sessions.
 
@@ -37,7 +37,9 @@ Additionally, Firefox enables better personalization through support for plain `
 
 ![firefox](./doc/img/firefox.png)
 
-### packages
+If you want to have a minimalistic Firefox look you can use my [userChrome.css](./userChrome.css) file. [Here](userChrome.css) you can see how to apply it. You may want to check [Keyboard shortcuts - Perform common Firefox tasks quickly](https://support.mozilla.org/en-US/kb/keyboard-shortcuts-perform-firefox-tasks-quickly) since the minimal UI hides several buttons like the navigation arrows.
+
+### :space_invader: packages
 
 * [Z](https://github.com/jethrokuan/z)
 * [ccat](https://github.com/owenthereal/ccat)
@@ -46,3 +48,11 @@ Additionally, Firefox enables better personalization through support for plain `
 
 ### :nut_and_bolt: VSCode extensions
 
+* [GitHub Copilot](https://marketplace.visualstudio.com/items?itemName=GitHub.copilot)
+* [GitHub Actions](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-github-actions)
+* [GitLens](https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens)
+* [HashiCorp Terraform](https://marketplace.visualstudio.com/items?itemName=HashiCorp.terraform)
+* [Output Colorizer](https://marketplace.visualstudio.com/items?itemName=IBM.output-colorizer)
+* [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+* [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
+* [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
