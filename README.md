@@ -2,181 +2,47 @@
 
 ## :grey_exclamation: Overview
 
-This repository includes my configuration files for `oh-my-zsh`, as well as a list of my current `macOS` applications, `brew` packages, and `vscode` extensions. The configuration is tailored for the `macOS` built-in terminal emulator, using `zsh` as the default shell and is enhanced with the powerful `oh-my-zsh` framework.
+This repository includes several configuration files I use, as well as a list of recommended `macOS` applications, `brew` packages, and `vscode` extensions. The configuration is tailored for the `macOS` built-in terminal emulator, using `zsh` as the default shell and is enhanced with the powerful `oh-my-zsh` framework.
 
-## :nail_care: Theme
+![terminal](./doc/img/terminal.png)
 
-I am using the [Powerlevel10k - Dracula](https://draculatheme.com/powerlevel10k) theme for a sleek, modern look with informative prompts.
+## :wrench: Configuration files
 
-## :eyes: Why Stick with Built-in macOS Apps?
+* [.zshrc](./.zshrc): My customized `zsh` setup with aliases, functions, and plugins for enhanced productivity.
+* [.opencommit](./opencommit): OpenCommit is an open-source command-line interface (CLI) tool designed to enhance the quality of your Git commit messages by leveraging AI language models. By analyzing your code changes, OpenCommit generates concise and informative commit messages, improving the clarity and professionalism of your project’s history.
 
-## Firefox browser
+You need to install the following brew packages in order to boost the `zsh` terminal:
+
+* [zsh-history-substring-search](https://github.com/zsh-users/zsh-history-substring-search)
+* [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
+* [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+
+## :dango: Recommended apps and packages
+
+### apps
+
+* [Raycast](https://www.raycast.com/): Raycast is a powerful, keyboard-driven productivity tool for macOS that lets users quickly perform tasks, run commands, and manage workflows through an intuitive launcher interface.
+* [Meeter](https://apps.apple.com/de/app/meeter-for-zoom-teams-co/id1510445899?l=en-GB&mt=12): Meeter is a macOS app that centralizes all your calendar events and online meeting links, enabling you to quickly join meetings from various platforms like Zoom, Google Meet, or Microsoft Teams in one click.
+* [Latest](https://apps.apple.com/de/app/meeter-for-zoom-teams-co/id1510445899?l=en-GB&mt=12): Software and apps update checker.
+* [Orbstack](https://orbstack.dev/): OrbStack is a lightweight, high-performance virtualization and containerization platform for macOS. It simplifies running Linux VMs, Docker containers, and other workloads by providing a fast, integrated environment designed for developers. OrbStack focuses on efficiency, minimizing resource usage, and offers seamless macOS integration with features like file sharing and networking. It aims to be an alternative to solutions like Docker Desktop, with an emphasis on speed and developer-friendly workflows.
+* [PastePal](https://apps.apple.com/es/app/pastepal-clipboard-manager/id1503446680): PastePal is a clipboard manager for macOS that helps users efficiently manage and organize their copied text, images, and files. It features a clean interface, quick access via a global shortcut, and advanced functionalities like searching, pinning, and syncing clips across devices. Designed for productivity, PastePal integrates seamlessly with macOS, offering privacy-focused clipboard history management and customization options for a streamlined workflow.
+* [Shottr](https://shottr.cc/): Shottr is a macOS screenshot tool designed for speed and precision, offering features like pixel-perfect annotations, OCR for text extraction, scrolling screenshots, and on-the-fly image editing. It is lightweight and caters to developers, designers, and anyone needing advanced screenshot capabilities, while maintaining a user-friendly and minimalistic interface.
+* [Stats](https://github.com/exelban/stats): Provides real-time statistics on your Mac’s hardware and performance. It offers insights into CPU usage, memory, disk activity, network traffic, and battery health. With a clean and simple interface, Stat allows users to monitor system performance, optimize workflows, and troubleshoot issues directly from the menu bar. It’s designed for users who want to keep track of their Mac’s vital statistics in an efficient, non-intrusive way.
+
+## Special mention: Firefox browser
 
 I chose Firefox for my DevOps work because it offers unique features that align perfectly with the demands of my workflow. One standout feature is its `multi-container` capability. This allows me to isolate contexts into specific containers, making it easy to manage multiple AWS accounts simultaneously. For example, I can have several `AWS` accounts open in the same browser window, each in its own tab, without cross-contamination of cookies or sessions.
 
 Additionally, Firefox enables better personalization through support for plain `CSS` customization. This means I can tweak the browser’s appearance to match my preferences or create custom styles that improve productivity, especially when dealing with dashboards or text-heavy interfaces. These features combine to make Firefox an invaluable tool for my DevOps tasks, offering both functional flexibility and a personalized experience.
 
-![firefox](firefox.png)
+![firefox](./doc/img/firefox.png)
 
-## :wrench: Included Configurations
-
-- **Zsh Configuration (`.zshrc`)**: My customized `zsh` setup with aliases, functions, and plugins for enhanced productivity.
-- **.p10k.zsh**: [Powerlevel10k - Dracula](https://draculatheme.com/powerlevel10k) theme configuration file.
-- **Brew Packages**: A list of essential packages installed via Homebrew.
-- **macOS Applications**: A curated list of macOS applications that I use, focused on performance and security.
-- **VSCode Extensions**: A collection of my most-used Visual Studio Code extensions to streamline development.
-
-## :white_check_mark: Getting Started
-
-### 1. Install `oh-my-zsh`
-
-First, you need to install `oh-my-zsh`: https://ohmyz.sh/#install
-
-### 2. Copy the Configuration Files
-
-```bash
-git clone https://github.com/jandroav/macos-config.git
-cd macOS-terminal-config
-cp .zshrc ~/
-cp .p10k.zsh ~/
-```
-
-### 3. Install packages and extension (Optional)
-
-```bash
-sh install_packages_extensions.sh
-```
-
-## :dango: Additional goodies
-
-Check the following links if you want to get some additional goodies:
+### packages
 
 * [Z](https://github.com/jethrokuan/z)
-* [Exa](https://the.exa.website)
+* [ccat](https://github.com/owenthereal/ccat)
+* [eza](https://github.com/eza-community/eza)
 * [opencommit](https://github.com/di-sukharev/opencommit)
 
-## :floppy_disk: Applications
+### :nut_and_bolt: VSCode extensions
 
-`ls -1 /Applications/ > apps.txt`
-
-```
-ChatGPT.app
-DBeaver.app
-'DisplayLink Manager.app'
-Firefox.app
-'GPG Keychain.app'
-Hush.app
-Latest.app
-Meeter.app
-Numbers.app
-OnyX.app
-OrbStack.app
-PastePal.app
-'Proton Mail.app'
-'Proton Mail Uninstaller.app'
-Raindrop.io.app
-Raycast.app
-Reeder.app
-'Save to Raindrop.io.app'
-Shottr.app
-Signal.app
-Slack.app
-Stats.app
-TrashMe.app
-Utilities
-'Visual Studio Code.app'
-Wipr.app
-'YubiKey Manager.app'
-zoom.us.app
-```
-
-## :beers: brew packages
-
-`brew list -1 > brew_packages`
-
-```
-==> Formulae
-aom
-awscli
-brotli
-c-ares
-ca-certificates
-cairo
-ccat
-cffi
-cloud-nuke
-cryptography
-eza
-fontconfig
-freetype
-fribidi
-gd
-gdk-pixbuf
-gettext
-giflib
-glib
-graphite2
-graphviz
-gts
-harfbuzz
-highway
-icu4c@76
-imath
-jasper
-jpeg-turbo
-jpeg-xl
-lz4
-lzo
-m4
-maven
-mpdecimal
-netpbm
-node
-openexr
-openjdk
-openssl@3
-pango
-pcre2
-pipx
-pixman
-powerlevel10k
-pycparser
-python-packaging
-python@3.12
-python@3.13
-readline
-shellcheck
-spacectl
-sqlite
-terraform
-webp
-xorgproto
-xz
-zoxide
-zsh-autosuggestions
-zsh-history-substring-search
-zsh-syntax-highlighting
-zstd
-
-==> Casks
-orbstack
-stats
-```
-
-## :nut_and_bolt: vscode extensions
-
-`code --list-extensions > vscode_extensions`
-
-```
-eamodio.gitlens
-esbenp.prettier-vscode
-github.copilot
-github.copilot-chat
-github.vscode-github-actions
-hashicorp.terraform
-ibm.output-colorizer
-ms-azuretools.vscode-docker
-ms-kubernetes-tools.vscode-kubernetes-tools
-natqe.reload
-redhat.vscode-yaml
-```
