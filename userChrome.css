@@ -24,12 +24,12 @@
 /* Page back and foward buttons */
 #back-button,
 #forward-button {
-  display: none !important;
+  /*display: none !important;*/
 }
 
 /* Extensions button */
 #unified-extensions-button {
-  display: none !important;
+  /* display: none !important;*/ /* uncomment this line to hide the extensions button */
 }
 
 /* Extension name inside URL bar */
@@ -263,49 +263,160 @@
   display: none !important;
 }
 
-/* Floating url bar */
-#urlbar:is([breakout][breakout-extend], [breakout][usertyping][focused]) {
-  #urlbar-input {
-    font-size: 16px !important;
-  }
+#pageAction-urlbar-_testpilot-containers {
+  display: none;
+}
 
-  z-index: 2;
-  position: fixed !important;
-  bottom: auto !important;
-  top: 20vh !important;
-  padding-left: 6px !important;
-  padding-right: 8px !important;
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/compact_extensions_panel.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
 
-  left: 18vw !important;
-  right: 18vw !important;
-  width: 64vw !important;
+/* This style hides some information from the extensions-button panel, but makes it appear more compact. Might be useful for someone having lot of extensions */
 
-  transition: all 0.3s ease-in-out !important;
+#unified-extensions-view{
+  --uei-icon-size: 16px;
+}
+.unified-extensions-item-menu-button.subviewbutton{
+  padding: 0px !important;
+  margin-inline-end: 0 !important;
+}
+.unified-extensions-item-action-button.subviewbutton{
+  padding-block: 6px !important;
+}
+.unified-extensions-item-menu-button.subviewbutton > .toolbarbutton-icon{
+  padding: 4px !important;
+}
+.unified-extensions-item-message-deck{
+  display: none
+}
+#unified-extensions-view > vbox > vbox > .unified-extensions-item{
+  padding-block: 0px !important;
+}
+#unified-extensions-panel .unified-extensions-item{
+  margin-block: 0 !important;
+}
 
-  &:after {
-    content: "";
-    position: fixed;
-    pointer-events: none;
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/selected_tab_gradient_border.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
 
-    width: 100vw;
-    height: 100vh;
+/* Adds a gradient outline to selected tab. This is going to need modifications if you use tabs that don't follow Proton styling. */
 
-    top: 0px;
-    left: 0px;
+.tab-background[selected]{
+  outline: none !important;
+  border: 2px solid transparent !important;
+  box-shadow: none !important;
+  background-clip: padding-box;
+}
+.tab-background[selected] > .tab-context-line{ margin: -5px 0 0 !important; }
+.tabbrowser-tab[selected] > .tab-stack::before{
+  content: "";
+  display: flex;
+  min-height: inherit;
+  border-radius: var(--tab-border-radius);
+  grid-area: 1/1;
+  margin-block: var(--tab-block-margin);
+  /* Edit gradient colors here */
+  background: repeat linear-gradient(90deg,rgba(255, 0, 255, 0.708),rgba(255, 0, 170, 0.617),rgba(60, 0, 255, 0.581))!important;
+}
 
-    background-color: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(5px);
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/tab_loading_progress_throbber.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
 
-    z-index: -1;
-  }
+/* Create a circular throbber inside tabs replacing the default one  */
+/* Doesn't really measure loading progress but sort of looks like it */
 
-  #identity-box {
-    margin: auto 0;
-    height: 30px;
-    margin-right: 10px;
-  }
+#tabbrowser-tabs{ --tab-loader-size: 16px; }
+.tab-throbber,
+.tabbrowser-tab[bursting] .tab-icon-image{
+  display: none !important;
+}
+.tab-icon-stack::before{
+  display: flex;
+  grid-area: 1/1;
+  content: "";
+  width:var(--tab-loader-size);
+  height:var(--tab-loader-size);
+  margin-right:6px;
+  background: center no-repeat url('data:image/svg+xml,<?xml version="1.0" encoding="UTF-8" ?><svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" version="1.1" stroke="url(%23gradient)" fill="none" width="100%" height="100%" stroke-width="1.7"><defs><radialGradient id="gradient" cx="50%" cy="0" r="0.6"><stop offset="0%" stop-color="lightpink"/><stop offset="100%" stop-color="red"/></radialGradient></defs><circle cx="8" cy="8" r="5.7"/></svg>') !important;
+  clip-path: polygon(50% 50%,50% 0%,50% 0%,50% 0%, 50% 0%,50% 0%, 50% 0%);
+  transition: clip-path 0.2s ease-out, opacity 0.3s linear 0.1s;
+}
 
-  .urlbar-go-button {
-    margin: auto 0;
-  }
+.tab-icon-stack[pinned]::before{ margin-right: 0px }
+@keyframes loadprogress{
+  from{ clip-path: polygon(50% 50%,50% 0%,100% 0%,100% 50%, 100% 50%,100% 50%, 100% 50%); }
+  25%{ clip-path: polygon(50% 50%,50% 0%,100% 0%,100% 100%, 100% 100%,100% 100%, 100% 100%); }
+  50%{ clip-path: polygon(50% 50%,50% 0%,100% 0%,100% 100%, 0% 100%,0% 100%,0% 100%); }
+  75%{ clip-path: polygon(50% 50%,50% 0%,100% 0%,100% 100%, 0% 100%,0% 0%,0% 0%); }
+  to{ clip-path: polygon(50% 50%,50% 0%,100% 0%,100% 100%, 0% 100%, 0% 0%, 50% 0%); }
+}
+@keyframes rotation{
+  from{ transform: rotateZ(0deg) }
+  to{ transform: rotateZ(360deg) }
+}
+.tabbrowser-tab:not([bursting]) .tab-icon-stack:not([busy])::before{ visibility: collapse; width: 0 }
+.tab-icon-stack:not([busy])::before{ opacity: 0 }
+.tabbrowser-tab:not([progress]) .tab-icon-stack[busy]::before{
+  clip-path: polygon(50% 50%,50% 0%,100% 0%,100% 50%, 100% 50%,100% 50%, 100% 50%);
+}
+.tabbrowser-tab[progress] .tab-icon-stack[busy]::before{
+  animation: loadprogress 2s linear, rotation 0.7s linear 2s infinite !important;
+  animation-fill-mode: forwards !important;
+}
+.tabbrowser-tab[bursting] .tab-icon-stack::before{
+  clip-path: polygon(50% 50%,50% 0%,100% 0%,100% 100%, 0% 100%,0% 0%, 50% 0%) !important;
+}
+#tabbrowser-tabs[schedulepressure] .tab-icon-stack::before{ display:none !important; }
+
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/urlbar_connection_type_background_colors.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
+
+/* Adds a colored overlay to urlbar based on the type of the connection */
+
+#identity-box::before{
+  position: absolute;
+  display: block;
+  content: "";
+  width: 100%;
+  height: var(--urlbar-height);
+  left: 0;
+  top: 0;
+  pointer-events: none;
+}
+:root[customizing] #identity-box::before,
+#urlbar[focused] #identity-box::before{ display: none }
+
+/* https */
+#identity-box.verifiedDomain::before{ background-color: rgba(50,255,50,0.2) }
+
+/* http: and potentially some other insecure connections like ftp: */
+#identity-box.certErrorPage::before,
+#identity-box.notSecure::before{ background-color: rgba(255,50,50,0.3) }
+
+/* Mixed content including neterror */
+#identity-box.unknownIdentity::before{ background-color: rgba(255,255,50,0.2) }
+
+/* Extension pages */
+#identity-box.extensionPage::before{ background-color: rgba(150,50,250,0.2) }
+
+/* Internal about: and chrome:// urls (includes reader-view) */
+#identity-box.chromeUI::before{ background-color: rgba(50,150,250,0.2) }
+
+/* Source file https://github.com/MrOtherGuy/firefox-csshacks/tree/master/chrome/urlbar_popup_full_width.css made available under Mozilla Public License v. 2.0
+See the above repository for updates as well as full license text. */
+
+/* Make urlbar popup appear full size like it did before urlbar re-design */
+
+.urlbarView-row-inner{
+  /* This sets how far the dropdown-items are from window edge */
+ padding-inline-start: 6px !important;
+}
+
+.urlbarView{
+ position: fixed !important;
+ top: inherit;
+ left: 0 !important;
+ margin: var(--urlbar-container-height) 0 0 0 !important;
+ width: 100vw !important;
+ border-width: 1px 0;
+ background-color: var(--toolbar-field-focus-background-color, inherit);
 }

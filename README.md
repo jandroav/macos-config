@@ -2,7 +2,7 @@
 
 ## :grey_exclamation: Overview
 
-This repository includes several configuration files I use, as well as a list of recommended `macOS` applications, `brew` packages, and `vscode` extensions. The configuration is tailored for the `macOS` built-in terminal emulator, using `zsh` as the default shell and is enhanced with the powerful `oh-my-zsh` framework.
+This repository includes several configuration files I use, as well as a list of recommended `macOS` applications, `brew` packages, and `vscode` extensions. The configuration is tailored for the [Ghostty terminal](https://github.com/ghostty-org/ghostty), using `zsh` as the default shell and is enhanced with the powerful `oh-my-zsh` framework.
 
 ![terminal](./doc/img/terminal.png)
 
@@ -10,6 +10,7 @@ This repository includes several configuration files I use, as well as a list of
 
 * [.zshrc](./.zshrc): My customized `zsh` setup with aliases, functions, and plugins for enhanced productivity.
 * [.opencommit](./.opencommit): OpenCommit is an open-source command-line interface (CLI) tool designed to enhance the quality of your Git commit messages by leveraging AI language models. By analyzing your code changes, OpenCommit generates concise and informative commit messages, improving the clarity and professionalism of your project’s history.
+* [config](./config): My `ghostty` terminal configuration.
 
 You need to install the following brew packages in order to boost the `zsh` terminal:
 
@@ -21,6 +22,7 @@ You need to install the following brew packages in order to boost the `zsh` term
 
 ### :apple: apps
 
+* [Ghostty](https://github.com/ghostty-org/ghostty): Ghostty is a terminal emulator that differentiates itself by being fast, feature-rich, and native. While there are many excellent terminal emulators available, they all force you to choose between speed, features, or native UIs. Ghostty provides all three
 * [Raycast](https://www.raycast.com/): Raycast is a powerful, keyboard-driven productivity tool for macOS that lets users quickly perform tasks, run commands, and manage workflows through an intuitive launcher interface.
 * [Meeter](https://apps.apple.com/de/app/meeter-for-zoom-teams-co/id1510445899?l=en-GB&mt=12): Meeter is a macOS app that centralizes all your calendar events and online meeting links, enabling you to quickly join meetings from various platforms like Zoom, Google Meet, or Microsoft Teams in one click.
 * [Latest](https://apps.apple.com/de/app/meeter-for-zoom-teams-co/id1510445899?l=en-GB&mt=12): Software and apps update checker.
@@ -41,6 +43,7 @@ If you want to have a minimalistic Firefox look you can use my [userChrome.css](
 
 ### :space_invader: packages
 
+* [Ghostty](https://github.com/ghostty-org/ghostty)
 * [Z](https://github.com/jethrokuan/z)
 * [ccat](https://github.com/owenthereal/ccat)
 * [eza](https://github.com/eza-community/eza)
@@ -56,3 +59,9 @@ If you want to have a minimalistic Firefox look you can use my [userChrome.css](
 * [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
 * [YAML](https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml)
 * [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
+* [Catppuccin for VSCode](https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc)
+* [Catppuccin Icons for VSCode](https://marketplace.visualstudio.com/items?itemName=Catppuccin.catppuccin-vsc-icons)
+
+This is how my `VSCode` looks like:
+
+![vscode](./doc/img/vscode.png)
