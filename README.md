@@ -41,6 +41,15 @@ Additionally, Firefox enables better personalization through support for plain `
 
 If you want to have a minimalistic Firefox look you can use my [userChrome.css](./userChrome.css) file. [Here](userChrome.css) you can see how to apply it. You may want to check [Keyboard shortcuts - Perform common Firefox tasks quickly](https://support.mozilla.org/en-US/kb/keyboard-shortcuts-perform-firefox-tasks-quickly) since the minimal UI hides several buttons like the navigation arrows.
 
+### user.js
+
+I created a `user.js` which disables telemetry and enables some other security enhancements by default. Here is how you can apply it:
+
+1. Download the user.js file here (Right click > Save Link As…).
+2. Open Firefox. In the URL bar, type `about:profiles` and press Enter.
+3. For the profile you want to use (or use default), click `Open Folder` in the `Root Directory` section.
+4. Move the `user.js` file into the folder.
+
 ### :space_invader: packages
 
 * [Ghostty](https://github.com/ghostty-org/ghostty)
