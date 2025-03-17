@@ -1,7 +1,0 @@
-theme = catppuccin-mocha
-font-size = 14
-font-family = MesloLGS NF
-background-opacity = 0.7
-background-blur-radius = 80
-mouse-hide-while-typing = true
-window-decoration = true

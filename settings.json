@@ -1,0 +1,99 @@
+{
+  // UI
+  "workbench.tree.indent": 8,
+  "editor.autoIndent": "full",
+  "window.customTitleBarVisibility": "windowed",
+  "workbench.startupEditor": "none",
+  "workbench.statusBar.visible": false,
+  "workbench.activityBar.location": "hidden",
+  "workbench.colorTheme": "One Dark Pro",
+  "workbench.tips.enabled": false,
+  "editor.tabSize": 2,
+  "editor.cursorStyle": "line",
+  "breadcrumbs.enabled": false,
+  "editor.minimap.enabled": false,
+  "workbench.sideBar.location": "right",
+  "material-icon-theme.hidesExplorerArrows": true,
+  "workbench.tree.renderIndentGuides": "none",
+  "explorer.compactFolders": false,
+  "window.titleBarStyle": "native",
+  "editor.scrollbar.horizontal": "hidden",
+  "editor.scrollbar.vertical": "hidden",
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.wordWrap": "on",
+  // FONTS
+  "editor.fontFamily": "Fira Code",
+  "editor.fontLigatures": true,
+  "terminal.integrated.fontFamily": "MesloLGS NF",
+  "editor.fontSize": 14,
+  "debug.console.fontSize": 14,
+  "scm.inputFontSize": 12,
+  "terminal.integrated.fontSize": 12,
+  "chat.editor.fontSize": 14,
+  // FORMATTERS
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  // TERRAFORM
+  "terraform.validation.enableEnhancedValidation": true,
+  "terraform.experimentalFeatures.prefillRequiredFields": true,
+  "terraform.experimentalFeatures.validateOnSave": true,
+  "terraform.codelens.referenceCount": true,
+  "[terraform]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.formatAll.terraform": "always"
+    }
+  },
+  "[terraform-vars]": {
+    "editor.defaultFormatter": "hashicorp.terraform",
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+      "source.formatAll.terraform": "always"
+    }
+  },
+  // MISC
+  "files.autoSave": "afterDelay",
+  "telemetry.telemetryLevel": "off",
+  "editor.smoothScrolling": true,
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "workbench.list.smoothScrolling": true,
+  "terminal.integrated.smoothScrolling": true,
+  "terminal.integrated.cursorBlinking": true,
+  // GO
+  "go.useLanguageServer": true,
+  "go.toolsManagement.autoUpdate": true,
+  "go.inlayHints.compositeLiteralFields": true,
+  "go.inlayHints.compositeLiteralTypes": true,
+  "go.inlayHints.functionTypeParameters": true,
+  "go.inlayHints.parameterNames": true,
+  "go.inlayHints.rangeVariableTypes": true,
+  "go.inlayHints.constantValues": true,
+  "go.lintTool": "golangci-lint",
+  "go.lintFlags": ["--fast", "--timeout", "5m", "--fix"],
+  "go.diagnostic.vulncheck": "Imports",
+  "go.toolsEnvVars": {
+    "GOFLAGS": "-buildvcs=false" // Better performance for large repos
+  },
+  "go.enableCodeLens": {
+    "runtest": true
+  },
+  "gopls": {
+    "ui.semanticTokens": true,
+    "ui.completion.usePlaceholders": false,
+    "formatting.gofumpt": true
+  },
+  "[go]": {
+    "editor.insertSpaces": false,
+    "editor.stickyScroll.enabled": true,
+    "editor.defaultFormatter": "golang.go",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "always",
+      "source.fixAll": "always"
+    }
+  },
+  "security.workspace.trust.untrustedFiles": "open"
+}
