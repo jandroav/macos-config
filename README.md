@@ -65,7 +65,7 @@ I only use one extension which is my work/peronal password manager of choice: Bi
 
 My full list:
 
-```json
+```txt
 adpyke.codesnap
 christian-kohler.path-intellisense
 databricks.sqltools-databricks-driver
@@ -105,3 +105,9 @@ zhuangtongfa.material-theme
 This is how my `VSCode` looks like:
 
 ![vscode](./doc/img/vscode.png)
+
+## Bonus tip: Slack
+
+Import this color scheme if you want a One Dark Pro look: `#24283B,#565F89,#9ECE6A,#F7768E`
+
+![slack](./doc/img/slack.png)
