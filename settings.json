@@ -1,11 +1,11 @@
 {
   // UI
-  "workbench.tree.indent": 8,
+  "workbench.tree.indent": 14,
   "editor.autoIndent": "full",
   "window.customTitleBarVisibility": "windowed",
   "workbench.startupEditor": "none",
   "workbench.statusBar.visible": false,
-  "workbench.activityBar.location": "hidden",
+  "workbench.activityBar.location": "top",
   "workbench.colorTheme": "One Dark Pro",
   "workbench.tips.enabled": false,
   "editor.tabSize": 2,
@@ -19,10 +19,13 @@
   "window.titleBarStyle": "native",
   "editor.scrollbar.horizontal": "hidden",
   "editor.scrollbar.vertical": "hidden",
-  "workbench.iconTheme": "material-icon-theme",
   "editor.wordWrap": "on",
+  "workbench.editor.customLabels.patterns": {
+    "**/modules/**": "${dirname}/${filename}",
+    "**/aws-control-tower/**/*.tf": "${dirname(1)}/${filename}"
+  },
   // FONTS
-  "editor.fontFamily": "Fira Code",
+  "editor.fontFamily": "JetBrains Mono",
   "editor.fontLigatures": true,
   "terminal.integrated.fontFamily": "MesloLGS NF",
   "editor.fontSize": 14,
@@ -56,11 +59,12 @@
   "files.autoSave": "afterDelay",
   "telemetry.telemetryLevel": "off",
   "editor.smoothScrolling": true,
-  "editor.cursorBlinking": "smooth",
+  "editor.cursorBlinking": "expand",
   "editor.cursorSmoothCaretAnimation": "on",
   "workbench.list.smoothScrolling": true,
   "terminal.integrated.smoothScrolling": true,
   "terminal.integrated.cursorBlinking": true,
+  "security.workspace.trust.untrustedFiles": "open",
   // GO
   "go.useLanguageServer": true,
   "go.toolsManagement.autoUpdate": true,
@@ -95,5 +99,44 @@
       "source.fixAll": "always"
     }
   },
-  "security.workspace.trust.untrustedFiles": "open"
+  //exludes fies & folders in search indexing
+  "search.exclude": {
+    "**/node_modules": true,
+    "**/bower_components": true,
+    "**/venv": true,
+    "**/.git": true,
+    "**/.terraform": true
+  },
+  //exludes fies & folders for watcher service
+  "files.watcherExclude": {
+    "**/.git/objects/**": true,
+    "**/.git/subtree-cache/**": true,
+    "**/node_modules/**": true,
+    "**/env/**": true,
+    "**/venv/**": true,
+    "**/.terraform": true,
+    "**/.DS_Store": true,
+    "**/.vscode": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/.vscode": true,
+    "**/__pycache__": true,
+    "**/.pytest_cache": true,
+    "**/node_modules": true,
+    "venv": true,
+    "**/.terraform": true
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+  "workbench.productIconTheme": "fluent-icons",
+  "editor.linkedEditing": true,
+  "codesnap.realLineNumbers": true,
+  "codesnap.showWindowTitle": true,
+  "codesnap.transparentBackground": true,
+  "markdown.preview.fontFamily": "JetBrains Mono",
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.largeFileOptimizations": false
 }
