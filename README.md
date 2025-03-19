@@ -38,9 +38,6 @@ I chose Firefox for my DevOps work because it offers unique features that align 
 
 Additionally, Firefox enables better personalization through support for plain `CSS` customization. This means I can tweak the browser’s appearance to match my preferences or create custom styles that improve productivity, especially when dealing with dashboards or text-heavy interfaces. These features combine to make Firefox an invaluable tool for my DevOps tasks, offering both functional flexibility and a personalized experience.
 
-![firefox](./doc/img/firefox.png)
-
-If you want to have a minimalistic Firefox look you can use my [userChrome.css](./userChrome.css) file. [Here](userChrome.css) you can see how to apply it. You may want to check [Keyboard shortcuts - Perform common Firefox tasks quickly](https://support.mozilla.org/en-US/kb/keyboard-shortcuts-perform-firefox-tasks-quickly) since the minimal UI hides several buttons like the navigation arrows.
 
 ### :space_invader: packages
 
