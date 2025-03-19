@@ -10,7 +10,7 @@ This repository includes several configuration files I use, as well as a list of
 
 - [.zshrc](./.zshrc): My customized `zsh` setup with aliases, functions, and plugins for enhanced productivity.
 - [.opencommit](./.opencommit): OpenCommit is an open-source command-line interface (CLI) tool designed to enhance the quality of your Git commit messages by leveraging AI language models. By analyzing your code changes, OpenCommit generates concise and informative commit messages, improving the clarity and professionalism of your project’s history.
-- [zed settings](./settings.json): My `zed` terminal configuration.
+- [zed settings](./settings.json): My [zed editor](https://zed.dev/) configuration.
 - `ghostty`: I am not currently using any custom configuration. It provides good defaults.
 
 You need to install the following brew packages in order to boost the `zsh` terminal:
