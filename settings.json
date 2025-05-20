@@ -1,148 +1,92 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
 {
-  // ===== WINDOW/WORKBENCH APPEARANCE =====
-  "workbench.activityBar.location": "top", // Places activity bar at the top of the window
-  "window.customTitleBarVisibility": "windowed", // Shows custom title bar in windowed mode only
-  "workbench.colorTheme": "Tokyo Night", // Sets color theme
-  "workbench.iconTheme": "catppuccin-latte", // Sets file icon theme
-  "workbench.productIconTheme": "fluent-icons", // Sets UI icon theme
-  "workbench.startupEditor": "none", // Disables welcome page on startup
-  "workbench.tree.renderIndentGuides": "none", // Hides indent guides in tree views
-  "workbench.tree.indent": 12, // Sets indentation width in tree views
-  "workbench.tree.enableStickyScroll": false, // Disables sticky scrolling in tree views
-  "workbench.remoteIndicator.showExtensionRecommendations": false, // Disables extension recommendations for remote sessions
-  "window.commandCenter": true, // Enables command center in title bar
-  "breadcrumbs.enabled": false, // Disables breadcrumbs navigation
-  
-  // ===== EDITOR APPEARANCE =====
-  "editor.fontFamily": "JetBrains Mono", // Sets editor font
-  "editor.fontLigatures": true, // Enables font ligatures for connected characters
-  "editor.fontSize": 13, // Sets editor font size
-  "editor.minimap.enabled": true, // Shows minimap code overview
-  "editor.stickyScroll.enabled": false, // Disables sticky scroll headers
-  "editor.stickyScroll.scrollWithEditor": false, // Prevents sticky scroll from moving with editor
-  "editor.smoothScrolling": true, // Enables smooth scrolling in editor
-  "editor.cursorBlinking": "expand", // Sets cursor to expand when blinking
-  "editor.cursorStyle": "line", // Sets cursor style as a line
-  "editor.cursorSmoothCaretAnimation": "on", // Enables smooth cursor animation
-  "editor.linkedEditing": true, // Automatically edits matching HTML/XML tags
-  
-  // ===== EDITOR BEHAVIOR =====
-  "editor.formatOnSave": true, // Formats document on save
-  "editor.formatOnPaste": true, // Formats pasted content
-  "files.autoSave": "afterDelay", // Auto-saves files after delay
-  "editor.autoIndent": "full", // Enables full auto-indentation
-  "editor.defaultFormatter": "esbenp.prettier-vscode", // Sets default formatter
-  "editor.largeFileOptimizations": false, // Disables optimizations for large files
-  
-  // ===== TERMINAL =====
-  "terminal.integrated.fontFamily": "MesloLGS NF", // Sets terminal font
-  "terminal.integrated.fontSize": 13, // Sets terminal font size
-  "terminal.integrated.smoothScrolling": true, // Enables smooth scrolling in terminal
-  "terminal.integrated.cursorBlinking": true, // Enables cursor blinking in terminal
-  
-  // ===== FONT SIZES =====
-  "debug.console.fontSize": 13, // Sets debug console font size
-  "scm.inputFontSize": 13, // Sets source control input font size
-  "chat.editor.fontSize": 13, // Sets chat editor font size
-  "markdown.preview.fontFamily": "JetBrains Mono", // Sets markdown preview font
-  
-  // ===== EXPLORER & FILES =====
-  "scm.compactFolders": false, // Disables folder compaction in source control
-  "explorer.compactFolders": false, // Disables nested folder compaction
-  "files.exclude": {
-    "**/.git": true, // Hides Git directories
-    "**/.DS_Store": true, // Hides macOS system files
-    "**/.vscode": true, // Hides VS Code config folders
-    "**/__pycache__": true, // Hides Python cache
-    "**/.pytest_cache": true, // Hides Python test cache
-    "**/node_modules": true, // Hides Node.js modules
-    "venv": true, // Hides Python virtual environment
-    "**/.terraform": true // Hides Terraform directories
-  },
-  "files.watcherExclude": {
-    "**/.git/objects/**": true, // Excludes Git objects from file watching
-    "**/.git/subtree-cache/**": true, // Excludes Git subtree cache
-    "**/node_modules/**": true, // Excludes Node.js modules
-    "**/env/**": true, // Excludes environment directories
-    "**/venv/**": true, // Excludes Python virtual environments
-    "**/.terraform": true, // Excludes Terraform directories
-    "**/.DS_Store": true, // Excludes macOS system files
-    "**/.vscode": true // Excludes VS Code config folders
-  },
-  "search.exclude": {
-    "**/node_modules": true, // Excludes node modules from search
-    "**/bower_components": true, // Excludes Bower components from search
-    "**/venv": true, // Excludes Python environments from search
-    "**/.git": true, // Excludes Git directories from search
-    "**/.terraform": true // Excludes Terraform directories from search
-  },
-  
-  // ===== GIT =====
-  "git.enableSmartCommit": true, // Enables automatic Git commit when no staged changes
-  "git.confirmSync": false, // Disables sync confirmation
-  "git.autofetch": true, // Automatically fetches from remote
-  
-  // ===== TELEMETRY & SECURITY =====
-  "redhat.telemetry.enabled": false, // Disables Red Hat extension telemetry
-  "telemetry.telemetryLevel": "off", // Disables VS Code telemetry
-  "security.workspace.trust.untrustedFiles": "open", // Opens untrusted files without warning
-  
-  // ===== NAVIGATION & SCROLLING =====
-  "workbench.list.smoothScrolling": true, // Enables smooth scrolling in lists
-  
-  // ===== GO LANGUAGE SETTINGS =====
-  "go.useLanguageServer": true, // Uses Go language server
-  "go.toolsManagement.autoUpdate": true, // Auto updates Go tools
-  "go.inlayHints.compositeLiteralFields": true, // Shows inlay hints for struct fields
-  "go.inlayHints.compositeLiteralTypes": true, // Shows inlay hints for composite literal types
-  "go.inlayHints.functionTypeParameters": true, // Shows inlay hints for function parameters
-  "go.inlayHints.parameterNames": true, // Shows parameter names as hints
-  "go.inlayHints.rangeVariableTypes": true, // Shows range variable types
-  "go.inlayHints.constantValues": true, // Shows constant values as hints
-  "go.lintTool": "golangci-lint", // Sets Go linting tool
-  "go.lintFlags": ["--fast", "--timeout", "5m", "--fix"], // Config for Go linter
-  "go.diagnostic.vulncheck": "Imports", // Checks for vulnerabilities in imports
-  "go.toolsEnvVars": {
-    "GOFLAGS": "-buildvcs=false" // Better performance for large repos
-  },
-  "go.enableCodeLens": {
-    "runtest": true // Enables test running in code lens
-  },
-  "gopls": {
-    "ui.semanticTokens": true, // Enables semantic highlighting
-    "ui.completion.usePlaceholders": false, // Disables placeholders in completion
-    "formatting.gofumpt": true // Uses gofumpt for formatting
-  },
-  "[go]": {
-    "editor.insertSpaces": false, // Uses tabs instead of spaces
-    "editor.stickyScroll.enabled": true, // Enables sticky scroll for Go files
-    "editor.defaultFormatter": "golang.go", // Sets Go formatter
-    "editor.formatOnSave": true, // Formats Go files on save
-    "editor.formatOnSaveMode": "file", // Format entire file on save
-    "editor.codeActionsOnSave": {
-      "source.organizeImports": "always", // Organizes imports on save
-      "source.fixAll": "always" // Fixes all auto-fixable issues on save
+  "tab_size": 2,
+  "format_on_save": "on",
+  "formatter": {
+    "external": {
+      "command": "prettier",
+      "arguments": ["--stdin-filepath", "{buffer_path}"]
     }
   },
-  
-  // ===== LANGUAGE-SPECIFIC SETTINGS =====
-  "[terraform]": {
-    "editor.formatOnSave": true, // Formats Terraform files on save
-    "editor.defaultFormatter": "hashicorp.terraform" // Sets Terraform formatter
+  "agent": {
+    "default_profile": "write",
+    "model_parameters": [],
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-3.7-sonnet"
+    },
+    "version": "2"
   },
-  "[terraform-vars]": {
-    "editor.formatOnSave": true, // Formats Terraform vars files on save
-    "editor.defaultFormatter": "hashicorp.terraform" // Sets Terraform vars formatter
+  "base_keymap": "VSCode",
+  "telemetry": {
+    "metrics": false,
+    "diagnostics": false
   },
-  "[xml]": {
-    "editor.defaultFormatter": "redhat.vscode-xml" // Sets XML formatter
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark"
   },
-  "[groovy]": {
-    "editor.defaultFormatter": "NicolasVuillamy.vscode-groovy-lint" // Sets Groovy formatter
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000
+    }
   },
-  
-  // ===== EXTENSION-SPECIFIC SETTINGS =====
-  "codesnap.realLineNumbers": true, // Shows real line numbers in code snapshots
-  "codesnap.showWindowTitle": true, // Shows window title in code snapshots
-  "codesnap.transparentBackground": true // Uses transparent background in code snapshots
+  "lsp": {
+    "terraform-ls": {
+      "initialization_options": {
+        "experimentalFeatures": {
+          "prefillRequiredFields": true
+        }
+      }
+    }
+  },
+  "languages": {
+    "Terraform": {
+      "formatter": {
+        "external": {
+          "command": "terraform",
+          "arguments": ["fmt", "-"]
+        }
+      }
+    }
+  },
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/.jj",
+    "**/CVS",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    "**/.terraform/**",
+    "**/.terraform.d/**",
+    "**/.terraformrc",
+    "**/node_modules/**"
+  ],
+  "project_panel": {
+    "auto_fold_dirs": false,
+    "scrollbar": {
+      "show": "never"
+    }
+  },
+  "tab_bar": {
+    "show_nav_history_buttons": false
+  },
+  "terminal": {
+    "font_family": "MesloLGS NF",
+    "copy_on_select": true,
+    "working_directory": "current_project_directory"
+  }
 }
