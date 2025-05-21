@@ -7,6 +7,7 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "icon_theme": "Catppuccin Mocha",
   "tab_size": 2,
   "format_on_save": "on",
   "formatter": {
@@ -16,13 +17,16 @@
     }
   },
   "agent": {
-    "default_profile": "write",
+    "default_profile": "ask",
     "model_parameters": [],
     "default_model": {
       "provider": "copilot_chat",
-      "model": "claude-3.7-sonnet"
+      "model": "gpt-4o"
     },
     "version": "2"
+  },
+  "features": {
+    "edit_prediction_provider": "copilot"
   },
   "base_keymap": "VSCode",
   "telemetry": {
@@ -34,7 +38,7 @@
   "theme": {
     "mode": "system",
     "light": "One Light",
-    "dark": "One Dark"
+    "dark": "Catppuccin Mocha"
   },
   "autosave": {
     "after_delay": {
@@ -88,5 +92,10 @@
     "font_family": "MesloLGS NF",
     "copy_on_select": true,
     "working_directory": "current_project_directory"
+  },
+  "tabs": {
+    "git_status": true,
+    "file_icons": true,
+    "show_diagnostics": "all"
   }
 }
