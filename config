@@ -7,4 +7,3 @@ keybind = global:cmd+grave_accent=toggle_quick_terminal
 theme = catppuccin-mocha
 mouse-hide-while-typing = true
 window-decoration = true
-macos-option-as-alt = true
