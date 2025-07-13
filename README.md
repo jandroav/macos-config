@@ -2,22 +2,37 @@
 
 ## :grey_exclamation: Overview
 
-This repository includes several configuration files I use, as well as a list of recommended `macOS` applications, `brew` packages, and `zed` extensions and configuration for a minimal UI look. The configuration is tailored for the [Ghostty terminal](https://github.com/ghostty-org/ghostty), using `zsh` as the default shell and is enhanced with the powerful `oh-my-zsh` framework.
+This repository includes several configuration files I use, as well as a list of recommended `macOS` applications and `brew` packages for a productive development environment. The configuration is tailored for the [Ghostty terminal](https://github.com/ghostty-org/ghostty), using `zsh` as the default shell and enhanced with the powerful `oh-my-zsh` framework. It also includes configurations for [AeroSpace](https://github.com/nikitabobko/AeroSpace) window manager and [SketchyBar](https://github.com/FelixKratz/SketchyBar) status bar.
 
-![terminal](./doc/img/terminal.png)
+![terminal](./doc/img/workspaces.png)
 
 ## :wrench: Configuration files
 
 - [.zshrc](./.zshrc): My customized `zsh` setup with aliases, functions, and plugins for enhanced productivity.
-- [.opencommit](./.opencommit): OpenCommit is an open-source command-line interface (CLI) tool designed to enhance the quality of your Git commit messages by leveraging AI language models. By analyzing your code changes, OpenCommit generates concise and informative commit messages, improving the clarity and professionalism of your project’s history.
-- [zed settings](./settings.json): My [zed editor](https://zed.dev/) configuration.
-- `ghostty`: I am not currently using any custom configuration. It provides good defaults.
+- [ghostty config](./config): Terminal emulator configuration file.
+- [aerospace](./aerospace/aerospace.toml): AeroSpace window manager configuration for efficient workspace management.
+- [sketchybar](./sketchybar/): SketchyBar status bar configuration and plugins.
+- [VSCode settings](./settings.json): Visual Studio Code configuration with minimal UI, formatting preferences, and productivity settings.
+- [Claude Code](/.claude/): AI coding assistant configuration including custom workflows, hooks for validation and optimization, permissions settings, and MCP server integrations for enhanced development capabilities.
 
-You need to install the following brew packages in order to boost the `zsh` terminal:
+You need to install the following brew packages for the complete setup:
+
+### :zap: ZSH Terminal Enhancement
 
 - [zsh-history-substring-search](https://github.com/zsh-users/zsh-history-substring-search)
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)
 - [zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)
+- [powerlevel10k](https://github.com/romkatv/powerlevel10k): A fast and customizable Zsh theme
+
+### :computer: Command Line Tools
+
+- [bat](https://github.com/sharkdp/bat): A cat clone with syntax highlighting (used in aliases)
+- [eza](https://github.com/eza-community/eza): A modern replacement for ls (used in aliases)
+
+### :hammer_and_wrench: Development Tools
+
+- [nvim](https://neovim.io/): Modern Vim-based text editor
+- [z](https://github.com/jethrokuan/z): Jump around directories based on frequency and recency
 
 ## :dango: Recommended apps and packages
 
@@ -25,26 +40,118 @@ You need to install the following brew packages in order to boost the `zsh` term
 
 - [Ghostty](https://github.com/ghostty-org/ghostty): Ghostty is a terminal emulator that differentiates itself by being fast, feature-rich, and native. While there are many excellent terminal emulators available, they all force you to choose between speed, features, or native UIs. Ghostty provides all three
 - [Raycast](https://www.raycast.com/): Raycast is a powerful, keyboard-driven productivity tool for macOS that lets users quickly perform tasks, run commands, and manage workflows through an intuitive launcher interface.
-- [Meeter](https://apps.apple.com/de/app/meeter-for-zoom-teams-co/id1510445899?l=en-GB&mt=12): Meeter is a macOS app that centralizes all your calendar events and online meeting links, enabling you to quickly join meetings from various platforms like Zoom, Google Meet, or Microsoft Teams in one click.
 - [Latest](https://apps.apple.com/de/app/meeter-for-zoom-teams-co/id1510445899?l=en-GB&mt=12): Software and apps update checker.
-- [Orbstack](https://orbstack.dev/): OrbStack is a lightweight, high-performance virtualization and containerization platform for macOS. It simplifies running Linux VMs, Docker containers, and other workloads by providing a fast, integrated environment designed for developers. OrbStack focuses on efficiency, minimizing resource usage, and offers seamless macOS integration with features like file sharing and networking. It aims to be an alternative to solutions like Docker Desktop, with an emphasis on speed and developer-friendly workflows.
 - [PastePal](https://apps.apple.com/es/app/pastepal-clipboard-manager/id1503446680): PastePal is a clipboard manager for macOS that helps users efficiently manage and organize their copied text, images, and files. It features a clean interface, quick access via a global shortcut, and advanced functionalities like searching, pinning, and syncing clips across devices. Designed for productivity, PastePal integrates seamlessly with macOS, offering privacy-focused clipboard history management and customization options for a streamlined workflow.
 - [Shottr](https://shottr.cc/): Shottr is a macOS screenshot tool designed for speed and precision, offering features like pixel-perfect annotations, OCR for text extraction, scrolling screenshots, and on-the-fly image editing. It is lightweight and caters to developers, designers, and anyone needing advanced screenshot capabilities, while maintaining a user-friendly and minimalistic interface.
-- [Stats](https://github.com/exelban/stats): Provides real-time statistics on your Mac’s hardware and performance. It offers insights into CPU usage, memory, disk activity, network traffic, and battery health. With a clean and simple interface, Stat allows users to monitor system performance, optimize workflows, and troubleshoot issues directly from the menu bar. It’s designed for users who want to keep track of their Mac’s vital statistics in an efficient, non-intrusive way.
-- [sesh](https://github.com/elva-labs/awsesh): Sesh is made to easily manage your AWS SSO sessions and accounts. Filter your accounts by name, and quickly switch between them.
+- [AeroSpace](https://github.com/nikitabobko/AeroSpace): AeroSpace is an i3-like tiling window manager for macOS. It's designed to be fast, configurable, and provides efficient workspace management with keyboard-driven navigation.
+- [Visual Studio Code](https://code.visualstudio.com/): VSCode is my primary code editor, offering excellent extensibility, integrated terminal, Git integration, and powerful debugging capabilities. Its lightweight yet feature-rich approach makes it perfect for development workflows.
+- [Clop](https://lowtechguys.com/clop/): Clop automatically optimizes images, videos, PDFs, and clipboard content to reduce file size with minimal quality loss. It features automatic clipboard optimization, screen recording compression, drag-and-drop file optimization, and works entirely on-device without cloud services.
+- [Dropover](https://dropoverapp.com/): Dropover simplifies file management through an innovative drag and drop system with floating shelves. It allows you to collect, organize, share, and process files using an intuitive "shake and drop" mechanism, making file transfer and organization significantly easier.
+- [MeetingBar](https://meetingbar.app/): MeetingBar is a free, open-source menu bar application that streamlines online meeting management. It provides one-click meeting access, supports 50+ meeting services, integrates with all calendars, and eliminates manual meeting link navigation.
+- [Raindrop](https://raindrop.io/): Raindrop.io is an all-in-one bookmark manager designed for creatives and coders. It offers organizational tools with collections and tags, instant web page previews, cross-platform access, full-text search, and automatic webpage backups in a privacy-focused environment.
+- [superwhisper](https://superwhisper.com/): superwhisper is an AI-powered voice-to-text application that enables writing 3x faster through speech. It supports 100+ languages, works entirely offline on your device for privacy, includes custom vocabulary support, and works across any app where you can type or paste text.
+- [Claude Code](https://claude.ai/code): Claude Code is my AI coding assistant of choice, providing intelligent code generation, debugging, and project management capabilities. It offers seamless integration with development workflows through MCP servers, custom hooks for validation and optimization, and supports complex multi-file operations with contextual understanding.
 
-## :goat: Special mention: Firefox browser
+## :shield: Special mention: Brave Browser
 
-I chose Firefox for my DevOps work because it offers unique features that align perfectly with the demands of my workflow. One standout feature is its `multi-container` capability. This allows me to isolate contexts into specific containers, making it easy to manage multiple AWS accounts simultaneously. For example, I can have several `AWS` accounts open in the same browser window, each in its own tab, without cross-contamination of cookies or sessions.
+I chose Brave for my development work because it offers unique features that align perfectly with modern web development and security needs. Brave provides built-in ad and tracker blocking, which significantly improves browsing speed and privacy without requiring additional extensions. Its Chromium-based engine ensures compatibility with all web development tools and extensions I need.
 
-Additionally, Firefox enables better personalization through support for plain `CSS` customization. This means I can tweak the browser’s appearance to match my preferences or create custom styles that improve productivity, especially when dealing with dashboards or text-heavy interfaces. These features combine to make Firefox an invaluable tool for my DevOps tasks, offering both functional flexibility and a personalized experience.
+One standout feature is Brave's approach to privacy by default, blocking third-party trackers and ads while still supporting legitimate websites. The browser also includes built-in HTTPS Everywhere functionality and fingerprinting protection. For development work, Brave's DevTools are identical to Chrome's, providing familiar debugging and testing capabilities while maintaining better privacy and performance compared to traditional browsers.
 
+## :robot: Claude Code Configuration
+
+The `.claude/` directory contains comprehensive configuration for Claude Code, my AI coding assistant:
+
+### :gear: Core Configuration Files
+
+- **[CLAUDE.md](/.claude/CLAUDE.md)**: Defines my standard development workflow including:
+
+  - 10-step structured approach: problem analysis → planning → verification → implementation → review
+  - Integration with MCP servers (context7, memory, sequentialthinking)
+  - Emphasis on simplicity and minimal code changes
+  - Todo-driven development with projectplan.md tracking
+
+- **[JIRA.md](/.claude/JIRA.md)**: Complete Jira ticket creation templates and guidelines:
+
+  - DevOps-specific field mappings and custom field IDs
+  - Structured ticket template with Product Owner, Developer, and QA sections
+  - Sprint and Squad assignment instructions
+  - Compliance with Datical Jira instance requirements
+
+- **[settings.json](/.claude/settings.json)**: Advanced Claude Code configuration featuring:
+  - **Permissions**: Granular tool access control (WebFetch, Bash, Read/Write/Edit operations)
+  - **Pre-tool hooks**: Validation scripts for Write and Edit operations
+  - **Post-tool hooks**: Optimization scripts that run after file modifications
+  - **Stop hooks**: Project summary generation on session completion
+
+This configuration ensures consistent, validated, and optimized development workflows with comprehensive project tracking and quality controls.
+
+## :link: MCP servers
+
+```json
+  "mcpServers": {
+    "atlassian": {
+      "type": "sse",
+      "url": "https://mcp.atlassian.com/v1/sse"
+    },
+    "context7": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@upstash/context7-mcp"
+      ],
+      "env": {}
+    },
+    "puppeteer": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-puppeteer"
+      ],
+      "env": {}
+    },
+    "github": {
+      "command": "docker",
+      "args": [
+        "run",
+        "-i",
+        "--rm",
+        "-e",
+        "GITHUB_PERSONAL_ACCESS_TOKEN",
+        "ghcr.io/github/github-mcp-server"
+      ],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "**************"
+      }
+    },
+    "taskmaster-ai": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "--package=task-master-ai",
+        "task-master-ai"
+      ],
+      "env": {
+        "MAX_TOKENS": 64000,
+        "TEMPERATURE": 0.2,
+        "DEFAULT_SUBTASKS": 5,
+        "DEFAULT_PRIORITY": "medium"
+      }
+    },
+    "memory": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@modelcontextprotocol/server-memory"
+      ]
+    }
+  }
+```
 
 ### :space_invader: packages
 
-- [Ghostty](https://github.com/ghostty-org/ghostty)
 - [Z](https://github.com/jethrokuan/z)
 - [ccat](https://github.com/owenthereal/ccat)
 - [eza](https://github.com/eza-community/eza)
-- [opencommit](https://github.com/di-sukharev/opencommit)
-

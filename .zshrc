@@ -8,18 +8,16 @@ fi
 # Path to your Oh My Zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git terraform aws command-not-found docker gh git-prompt ssh ssh-agent colorize mvn npm python pip golang)
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time Oh My Zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
+ZSH_THEME="robbyrussell"
+
+
+plugins=(git zsh-history-substring-search zsh-bat zsh-autosuggestions you-should-use zsh-syntax-highlighting sudo aws command-not-found emoji macos opentofu terraform ssh ssh-agent vscode z)
 
 source $ZSH/oh-my-zsh.sh
-source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Aliases
 alias ls='eza -l'
@@ -27,26 +25,44 @@ alias c='clear'
 alias h='history'
 alias ga='git add .'
 alias gc='git commit -m'
-alias gp='git push'
+alias gp='git add . && git commit -m "update repo" && git push'
 alias gpl='git pull'
 alias gs='git status'
 alias gco='git checkout'
 alias gcb='git checkout -b'
 alias gcm='git checkout master'
 alias e='exit'
-alias cat='ccat'
-alias oc='gpl && terraform fmt --recursive && oco'
+alias oc='gpl && tofu fmt --recursive && oco'
+alias n='nvim'
+alias k='kubectl'
+alias cat='bat --style=plain --color=always --line-range=1:1000 --paging=never --decorations=always --theme=ansi --wrap=never'
+alias cc='npx ccusage@latest'
+# Add Homebrew to PATH
+export PATH="/opt/homebrew/bin:$PATH"
 
-# Source additional configurations
-eval "$(zoxide init zsh)"
-source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
+# The following lines have been added by Docker Desktop to enable Docker CLI completions.
+fpath=(/Users/jandro/.docker/completions $fpath)
+autoload -Uz compinit
+compinit
+# End of Docker CLI completions
+
+export PATH="$HOME/bin:$PATH"
+
 source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
 
-# Key bindings for zsh-history-substring-search
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
 bindkey "$terminfo[kcuu1]" history-substring-search-up
 bindkey "$terminfo[kcud1]" history-substring-search-down
-
-# Brew command-not-found handler
-HB_CNF_HANDLER="$(brew --repository)/Library/Taps/homebrew/homebrew-command-not-found/handler.sh"
-[[ -f "$HB_CNF_HANDLER" ]] && source "$HB_CNF_HANDLER"

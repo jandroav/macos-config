@@ -1,101 +1,34 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "icon_theme": "Catppuccin Mocha",
-  "tab_size": 2,
-  "format_on_save": "on",
-  "formatter": {
-    "external": {
-      "command": "prettier",
-      "arguments": ["--stdin-filepath", "{buffer_path}"]
-    }
+  "workbench.activityBar.location": "top",
+  "window.customTitleBarVisibility": "windowed",
+  "files.autoSave": "afterDelay",
+  "editor.stickyScroll.enabled": false,
+  "workbench.tree.enableStickyScroll": false,
+  "workbench.startupEditor": "none",
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "extensions.ignoreRecommendations": true,
+  "security.workspace.trust.untrustedFiles": "open",
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": false,
+    "scminput": false
   },
-  "agent": {
-    "default_profile": "ask",
-    "model_parameters": [],
-    "default_model": {
-      "provider": "copilot_chat",
-      "model": "gpt-4o"
-    },
-    "version": "2"
+  "editor.minimap.enabled": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "update.showReleaseNotes": false,
+  "[opentofu]": {
+    "editor.defaultFormatter": "opentofu.opentofu",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
   },
-  "features": {
-    "edit_prediction_provider": "copilot"
-  },
-  "base_keymap": "VSCode",
-  "telemetry": {
-    "metrics": false,
-    "diagnostics": false
-  },
-  "ui_font_size": 16,
-  "buffer_font_size": 16,
-  "theme": {
-    "mode": "system",
-    "light": "One Light",
-    "dark": "Catppuccin Mocha"
-  },
-  "autosave": {
-    "after_delay": {
-      "milliseconds": 1000
-    }
-  },
-  "lsp": {
-    "terraform-ls": {
-      "initialization_options": {
-        "experimentalFeatures": {
-          "prefillRequiredFields": true
-        }
-      }
-    }
-  },
-  "languages": {
-    "Terraform": {
-      "formatter": {
-        "external": {
-          "command": "terraform",
-          "arguments": ["fmt", "-"]
-        }
-      }
-    }
-  },
-  "file_scan_exclusions": [
-    "**/.git",
-    "**/.svn",
-    "**/.hg",
-    "**/.jj",
-    "**/CVS",
-    "**/.DS_Store",
-    "**/Thumbs.db",
-    "**/.classpath",
-    "**/.settings",
-    "**/.terraform/**",
-    "**/.terraform.d/**",
-    "**/.terraformrc",
-    "**/node_modules/**"
-  ],
-  "project_panel": {
-    "auto_fold_dirs": false,
-    "scrollbar": {
-      "show": "never"
-    }
-  },
-  "tab_bar": {
-    "show_nav_history_buttons": false
-  },
-  "terminal": {
-    "font_family": "MesloLGS NF",
-    "copy_on_select": true,
-    "working_directory": "current_project_directory"
-  },
-  "tabs": {
-    "git_status": true,
-    "file_icons": true,
-    "show_diagnostics": "all"
+  "[opentofu-vars]": {
+    "editor.defaultFormatter": "opentofu.opentofu",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file"
   }
 }
