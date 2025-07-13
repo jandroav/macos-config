@@ -160,11 +160,6 @@ alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 # See: https://nikitabobko.github.io/AeroSpace/commands#mode
 alt-shift-semicolon = 'mode service'
 
-# VS Code specific handling
-[[on-window-detected]]
-if.app-id = 'com.microsoft.VSCode'
-run = 'layout floating'
-
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]
