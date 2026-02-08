@@ -1,0 +1,29 @@
+[gpg]
+	format = ssh
+[user]
+	signingkey = /Users/jandro/.ssh/id_ed25519.pub
+	name = Alejandro Alvarez
+	email = github@jandroav.net
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main
+[pull]
+	rebase = true
+[fetch]
+	prune = true
+	fsckObjects = true
+[rebase]
+	autoStash = true
+[rerere]
+	enabled = true
+[core]
+	excludesfile = /Users/jandro/.gitignore_global
+	autocrlf = input
+	editor = code --wait
+[diff]
+	colorMoved = default
+[transfer]
+	fsckObjects = true
+[receive]
+	fsckObjects = true

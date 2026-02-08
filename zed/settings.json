@@ -1,0 +1,131 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "edit_predictions": {
+    "provider": "copilot"
+  },
+  "project_panel": {
+    "sticky_scroll": false,
+    "auto_fold_dirs": false,
+    "indent_guides": {
+      "show": "never",
+    },
+    "hide_root": true,
+  },
+  "tab_bar": {
+    "show": true,
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": false,
+  },
+  "sticky_scroll": {
+    "enabled": false,
+  },
+  "scrollbar": {
+    "show": "never",
+  },
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false,
+    "selections_menu": false,
+  },
+  "collaboration_panel": {
+    "button": false
+  },
+  "outline_panel": {
+    "button": false
+  },
+  "diagnostics": {
+    "inline": {
+      "enabled": true,
+      "update_debounce_ms": 150,
+      "padding": 4,
+      "min_column": 0,
+      "max_severity": null,
+    },
+    "include_warnings": true,
+  },
+  "buffer_font_family": "FiraCode Nerd Font",
+  "ui_font_family": "FiraCode Nerd Font",
+  "autosave": {
+    "after_delay": {
+      "milliseconds": 1000,
+    },
+  },
+  "agent": {
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-haiku-4.5",
+    },
+    "favorite_models": [],
+    "model_parameters": [],
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
+  "session": {
+    "trust_all_worktrees": true,
+  },
+  "icon_theme": "Zed (Default)",
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "Gruvbox Dark",
+  },
+  "file_types": {
+    "OpenTofu": ["tf"],
+    "OpenTofu Vars": ["tfvars"],
+  },
+  "languages": {
+    "OpenTofu": {
+      "language_servers": ["tofu-ls"],
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "tofu",
+          "arguments": ["fmt", "-"],
+        },
+      },
+    },
+    "OpenTofu Vars": {
+      "language_servers": ["tofu-ls"],
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "tofu",
+          "arguments": ["fmt", "-"],
+        },
+      },
+    },
+  },
+  "lsp": {
+    "tofu-ls": {
+      "initialization_options": {
+        "validation": {
+          "enableEnhancedValidation": true,
+        },
+        "experimentalFeatures": {
+          "validateOnSave": true,
+        },
+      },
+    },
+  },
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.hg",
+    "**/.jj",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    "**/vendor",
+  ],
+}

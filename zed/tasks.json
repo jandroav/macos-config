@@ -1,0 +1,13 @@
+[
+  {
+    "label": "CodeSnap",
+    "command": "codesnap --mac-window-bar true --code-font-family 'FiraCode Nerd Font' -o clipboard --file-path \"$ZED_RELATIVE_FILE\" --has-line-number --start-line-number $ZED_ROW --has-breadcrumbs true -c",
+    "args": ["\"$ZED_SELECTED_TEXT\""],
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "never",
+    "reveal_target": "dock",
+    "hide": "on_success",
+    "shell": "system",
+  },
+]
