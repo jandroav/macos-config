@@ -8,8 +8,11 @@ My macOS development environment. Ghostty terminal, zsh shell, starship prompt, 
 |------|-------------|
 | [.zshrc](.zshrc) | Shell config -- aliases, starship, zoxide, zsh plugins |
 | [.zprofile](.zprofile) | Homebrew shellenv |
-| [config](config) | Ghostty terminal -- Gruvbox Dark, FiraCode 16px, tabs |
-| [karabiner.json](karabiner.json) | Caps Lock -> hyper key, double-tap RShift -> caps, grave/backslash swap (ISO) |
+| [config](config) | Ghostty terminal -- Catppuccin Mocha, JetBrainsMono 14px, tabs |
+| [karabiner.json](karabiner.json) | Caps Lock -> hyper key, grave/backslash swap (ISO) |
+| [.aerospace.toml](.aerospace.toml) | AeroSpace tiling WM -- workspaces, keybindings, window rules, sketchybar integration |
+| [bordersrc](bordersrc) | JankyBorders -- purple gradient active border, faint inactive, ax_focus |
+| [sketchybar/](sketchybar/) | SketchyBar -- status bar config, plugins (workspaces, media, system stats) |
 | [zed/](zed/) | Zed editor -- settings, keymap, tasks (Gruvbox Dark, OpenTofu LSP, CodeSnap) |
 | [starship.toml](starship.toml) | Starship prompt with Nerd Font symbols |
 | [.gitconfig](.gitconfig) | Git -- SSH signing, rebase on pull, rerere, prune on fetch |
@@ -32,6 +35,9 @@ Installed in `/Applications/`:
 - **Latest** -- app update checker
 - **Spotify** -- music
 - **Things3** -- task manager
+- **AeroSpace** -- tiling window manager
+- **JankyBorders** -- window borders
+- **SketchyBar** -- status bar
 - **Karabiner-Elements** -- keyboard customization
 - **AppCleaner** -- app uninstaller
 - **Screen Studio** -- screen recording

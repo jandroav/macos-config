@@ -1,7 +1,11 @@
-theme = Gruvbox Dark
-font-family = FiraCode Nerd Font
-font-size = 16
-window-save-state = always
+theme = Catppuccin Mocha
+font-family = JetBrainsMono Nerd Font
+font-size = 14
+macos-titlebar-style = tabs
 copy-on-select = clipboard
 mouse-hide-while-typing = true
-macos-titlebar-style = tabs
+scrollback-limit = 100000000
+shell-integration = zsh
+window-save-state = always
+window-colorspace = display-p3
+
