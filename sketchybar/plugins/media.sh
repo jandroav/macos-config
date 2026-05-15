@@ -1,47 +1,34 @@
-#!/usr/bin/env sh
-# =============================================================================
-# media.sh — Show non-Spotify media playback (YouTube, Apple Music, etc.)
-# =============================================================================
-# Uses nowplaying-cli to get the currently playing media from any app.
-# Intentionally hides when Spotify is the source (spotifyIndicator.sh handles
-# that separately to avoid duplicate display).
-#
-# Truncates long titles (>25 chars) and labels (>40 chars) with an ellipsis.
-# Hides itself and the media_logo when nothing is playing.
-# =============================================================================
+#!/bin/sh
 
-APP=$(nowplaying-cli get appName 2>/dev/null | head -1)
-STATE=$(nowplaying-cli get playbackRate 2>/dev/null | head -1)
+# Ensure UTF-8 encoding for proper handling of international characters
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
-# Hide when: no app reported, playback paused (rate=0), or Spotify is playing
-if [ -z "$APP" ] || [ "$STATE" = "0" ] || [ "$APP" = "Spotify" ]; then
-  sketchybar --set '/media.*/' drawing=off
-  exit 0
-fi
+APP=""
+for app in "Spotify" "Music"; do
+  if pgrep -x "$app" > /dev/null 2>&1; then
+    STATE="$(osascript -e "tell application \"$app\" to player state" 2>/dev/null)"
+    if [ "$STATE" = "playing" ] || [ "$STATE" = "paused" ]; then
+      APP="$app"
+      break
+    fi
+  fi
+done
 
-TITLE=$(nowplaying-cli get title 2>/dev/null | head -1)
-ARTIST=$(nowplaying-cli get artist 2>/dev/null | head -1)
+if [ -n "$APP" ]; then
+  TITLE="$(osascript -e "tell application \"$APP\" to name of current track" 2>/dev/null)"
+  ARTIST="$(osascript -e "tell application \"$APP\" to artist of current track" 2>/dev/null)"
 
-# Hide if there's no title to show
-if [ -z "$TITLE" ] || [ "$TITLE" = "null" ]; then
-  sketchybar --set '/media.*/' drawing=off
-  exit 0
-fi
+  # Convert to UTF-8 and sanitize for sketchybar
+  TITLE="$(echo "$TITLE" | iconv -f UTF-8 -t UTF-8//IGNORE 2>/dev/null | tr -d '\n\r')"
+  ARTIST="$(echo "$ARTIST" | iconv -f UTF-8 -t UTF-8//IGNORE 2>/dev/null | tr -d '\n\r')"
 
-# Truncate long titles to keep the bar readable
-if [ ${#TITLE} -gt 25 ]; then
-  TITLE="$(echo "$TITLE" | cut -c1-25)…"
-fi
+  LABEL="$ARTIST - $TITLE"
+  if [ ${#LABEL} -gt 50 ]; then
+    LABEL="$(echo "$LABEL" | cut -c1-47)..."
+  fi
 
-if [ -n "$ARTIST" ] && [ "$ARTIST" != "null" ]; then
-  LABEL="$TITLE - $ARTIST"
+  sketchybar --set media.cover drawing=on label="$LABEL"
 else
-  LABEL="$TITLE"
+  sketchybar --set media.cover drawing=off
 fi
-
-# Truncate the full label too
-if [ ${#LABEL} -gt 40 ]; then
-  LABEL="$(echo "$LABEL" | cut -c1-40)…"
-fi
-
-sketchybar --set "$NAME" label=" $LABEL" --set '/media.*/' drawing=on

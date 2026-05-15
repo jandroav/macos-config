@@ -1,221 +1,106 @@
-# =============================================================================
-# AeroSpace — Tiling Window Manager for macOS
-# =============================================================================
-# AeroSpace automatically arranges your windows in a tiling layout (like i3/sway
-# on Linux). Instead of manually dragging/resizing windows, they fill the screen
-# in a grid. This file controls all its behavior and keybindings.
-#
-# Config location: ~/.aerospace.toml
-# Docs: https://nikitabobko.github.io/AeroSpace/
-# =============================================================================
-
-# -- Startup ------------------------------------------------------------------
-
-# Commands to run after macOS login (requires start-at-login = true)
-after-login-command = []
-
-# Commands to run after AeroSpace starts (runs after after-login-command).
-# This launches sketchybar (the status bar) alongside AeroSpace.
-# Sketchybar detects if it's already running, so restarting AeroSpace won't
-# spawn a duplicate.
-after-startup-command = ['exec-and-forget sketchybar']
-
-# Auto-start AeroSpace when you log in to macOS
+config-version = 2
+after-startup-command = [
+    'exec-and-forget ~/.config/borders/bordersrc',
+    'exec-and-forget sketchybar',
+    'exec-and-forget ~/.config/sketchybar/plugins/space_windows.sh'
+]
 start-at-login = true
-
-# -- Window Layout Behavior ---------------------------------------------------
-
-# Flatten containers: if a container only has one child container, merge them.
-# This prevents deeply nested layouts that are hard to navigate.
 enable-normalization-flatten-containers = true
-
-# Opposite orientation: when you nest a container inside another, automatically
-# alternate between horizontal/vertical splitting (H > V > H > V...).
 enable-normalization-opposite-orientation-for-nested-containers = true
-
-# Accordion mode padding (pixels between overlapping windows in accordion layout)
-accordion-padding = 30
-
-# Default layout for new workspaces: 'tiles' places windows side-by-side,
-# 'accordion' stacks them with overlap (like tabs you can peek at)
+accordion-padding = 200
 default-root-container-layout = 'tiles'
-
-# How new windows split: 'auto' means wide monitors split horizontally,
-# tall monitors split vertically
 default-root-container-orientation = 'auto'
-
-# -- Multi-Monitor Behavior ---------------------------------------------------
-
-# When you switch focus to a different monitor, move the mouse cursor to the
-# center of that monitor (but only if the mouse isn't already on it).
-# This prevents "lost cursor" confusion with multi-monitor setups.
-on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
-
-# -- macOS Integration --------------------------------------------------------
-
-# When false: cmd-h can hide apps (macOS default behavior).
-# When true: AeroSpace will automatically unhide any hidden app, effectively
-# disabling cmd-h. Useful if you keep accidentally hiding apps.
+on-focus-changed = [
+    'exec-and-forget /bin/bash -c "sketchybar --trigger front_app_switched INFO=$(aerospace list-windows --focused --format %{app-name})"',
+    'exec-and-forget /bin/bash -c "for sid in 1 2 3 4; do sketchybar --trigger aerospace_workspace_change NAME=space.$sid FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused); done"',
+    'exec-and-forget ~/.config/sketchybar/plugins/space_windows.sh'
+]
 automatically-unhide-macos-hidden-apps = false
 
-# -- Sketchybar Integration ---------------------------------------------------
-
-# Every time you switch workspaces, fire a sketchybar event so the bar updates.
-# Passes both the new and previous workspace IDs as environment variables so
-# sketchybar plugins can update workspace indicators accordingly.
-exec-on-workspace-change = ['/bin/bash', '-c',
-    'sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$AEROSPACE_FOCUSED_WORKSPACE PREV_WORKSPACE=$AEROSPACE_PREV_WORKSPACE'
-]
-
-# -- Keyboard Layout ----------------------------------------------------------
-
-[key-mapping]
-preset = 'qwerty'
-
-# -- Gaps (spacing around and between windows) --------------------------------
-# inner.* = space between adjacent windows
-# outer.* = space between windows and screen edges
-# outer.top uses per-monitor values: smaller on the built-in display (no bar
-# overlap), larger on external monitors (to make room for sketchybar)
-
-[gaps]
-inner.horizontal = 15
-inner.vertical =   15
-outer.left =       15
-outer.bottom =     15
-outer.top =        [{ monitor."Built-in" = 4 }, 36]
-outer.right =      15
-
-# -- Workspace-to-Monitor Assignment -----------------------------------------
-# Pin workspaces A and B to the laptop screen.
+persistent-workspaces = ["1", "2", "3", "4"]
 
 [workspace-to-monitor-force-assignment]
-3 = 'built-in'
-4 = 'built-in'
+    1 = 'secondary'
+    2 = 'secondary'
+    3 = 'built-in'
+    4 = 'built-in'
 
-# =============================================================================
-# KEYBINDINGS — Main Mode
-# =============================================================================
-# Caps Lock is remapped to Hyper (⌘⌃⌥⇧) via Karabiner-Elements.
-# Hyper + key = lightweight actions (focus, switch workspace, layout)
-# Ctrl + Alt + key = heavyweight actions (move window, resize)
+[key-mapping]
+    preset = 'qwerty'
+
+[gaps]
+    inner.horizontal = 9
+    inner.vertical =   9
+    outer.left =       9
+    outer.bottom =     9
+    outer.top =        [{ monitor.'built-in' = 14 }, 50]
+    outer.right =      9
 
 [mode.main.binding]
+    shift-alt-p = 'layout tiles horizontal vertical'
+    shift-alt-y = 'layout tiles vertical'
+    shift-alt-r = 'layout tiles horizontal'
+    shift-alt-q = 'layout floating'
+    shift-alt-n = 'layout tiles'
+    shift-alt-a = 'layout accordion'
+    shift-alt-t = 'layout floating tiling'
 
-# Open LycheeSlicer as a scratchpad (floating toggle window)
-cmd-ctrl-1 = "exec-and-forget aerospace-scratchpad show LycheeSlicer"
+    alt-h = 'focus left'
+    alt-j = 'focus down'
+    alt-k = 'focus up'
+    alt-l = 'focus right'
 
-# -- Layout Switching ---------------------------------------------------------
-# Hyper + / = cycle between horizontal and vertical tiling
-cmd-alt-ctrl-shift-slash = 'layout tiles horizontal vertical'
-# Hyper + , = cycle between horizontal and vertical accordion (stacked) layout
-cmd-alt-ctrl-shift-comma = 'layout accordion horizontal vertical'
+    ctrl-alt-shift-cmd-h = 'focus left'
+    ctrl-alt-shift-cmd-j = 'focus down'
+    ctrl-alt-shift-cmd-k = 'focus up'
+    ctrl-alt-shift-cmd-l = 'focus right'
 
-# -- Focus (move your attention to another window) ----------------------------
-# Hyper + vim-style hjkl: h=left, j=down, k=up, l=right
-cmd-alt-ctrl-shift-h = 'focus left'
-cmd-alt-ctrl-shift-j = 'focus down'
-cmd-alt-ctrl-shift-k = 'focus up'
-cmd-alt-ctrl-shift-l = 'focus right'
+    ctrl-alt-h = 'swap left'
+    ctrl-alt-j = 'swap down'
+    ctrl-alt-k = 'swap up'
+    ctrl-alt-l = 'swap right'
 
-# -- Move (physically move the focused window) --------------------------------
-# Ctrl + Alt + vim keys
-ctrl-alt-h = 'move left'
-ctrl-alt-j = 'move down'
-ctrl-alt-k = 'move up'
-ctrl-alt-l = 'move right'
+    alt-shift-h = 'resize width -50'
+    alt-shift-j = 'resize height +50'
+    alt-shift-k = 'resize height -50'
+    alt-shift-l = 'resize width +50'
 
-# -- Resize -------------------------------------------------------------------
-# Ctrl + Alt + minus/equal: shrink or grow by 50px
-ctrl-alt-minus = 'resize smart -50'
-ctrl-alt-equal = 'resize smart +50'
+    ctrl-alt-shift-cmd-1 = ['workspace 1', 'exec-and-forget sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=1']
+    ctrl-alt-shift-cmd-2 = ['workspace 2', 'exec-and-forget sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=2']
+    ctrl-alt-shift-cmd-3 = ['workspace 3', 'exec-and-forget sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=3']
+    ctrl-alt-shift-cmd-4 = ['workspace 4', 'exec-and-forget sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=4']
 
-# -- Workspace Switching (Hyper + number) -------------------------------------
-# Each workspace is a virtual desktop. Workspaces 1-9 are enabled.
-cmd-alt-ctrl-shift-1 = 'workspace 1'
-cmd-alt-ctrl-shift-2 = 'workspace 2'
-cmd-alt-ctrl-shift-3 = 'workspace 3'
-cmd-alt-ctrl-shift-4 = 'workspace 4'
-cmd-alt-ctrl-shift-5 = 'workspace 5'
-cmd-alt-ctrl-shift-6 = 'workspace 6'
-cmd-alt-ctrl-shift-7 = 'workspace 7'
-cmd-alt-ctrl-shift-8 = 'workspace 8'
-cmd-alt-ctrl-shift-9 = 'workspace 9'
+    alt-shift-1 = ['move-node-to-workspace 1', 'exec-and-forget ~/.config/sketchybar/plugins/space_windows.sh']
+    alt-shift-2 = ['move-node-to-workspace 2', 'exec-and-forget ~/.config/sketchybar/plugins/space_windows.sh']
+    alt-shift-3 = ['move-node-to-workspace 3', 'exec-and-forget ~/.config/sketchybar/plugins/space_windows.sh']
+    alt-shift-4 = ['move-node-to-workspace 4', 'exec-and-forget ~/.config/sketchybar/plugins/space_windows.sh']
 
-# -- Move Window to Workspace (Ctrl + Alt + number) --------------------------
-# Sends the focused window to another workspace and follows it there.
-ctrl-alt-1 = 'move-node-to-workspace 1 --focus-follows-window'
-ctrl-alt-2 = 'move-node-to-workspace 2 --focus-follows-window'
-ctrl-alt-3 = 'move-node-to-workspace 3 --focus-follows-window'
-ctrl-alt-4 = 'move-node-to-workspace 4 --focus-follows-window'
-ctrl-alt-5 = 'move-node-to-workspace 5 --focus-follows-window'
-ctrl-alt-6 = 'move-node-to-workspace 6 --focus-follows-window'
-ctrl-alt-7 = 'move-node-to-workspace 7 --focus-follows-window'
-ctrl-alt-8 = 'move-node-to-workspace 8 --focus-follows-window'
-ctrl-alt-9 = 'move-node-to-workspace 9 --focus-follows-window'
 
-# -- Quick Navigation ---------------------------------------------------------
+    shift-alt-enter = 'flatten-workspace-tree'
+    alt-tab = 'workspace-back-and-forth'
+    alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
+    alt-shift-semicolon = 'mode service'
 
-# Hyper + Tab = toggle between the current and previous workspace
-cmd-alt-ctrl-shift-tab = 'workspace-back-and-forth'
+    ctrl-alt-enter = 'fullscreen'
+    shift-alt-f = 'macos-native-fullscreen'
 
-# Ctrl + Alt + Tab = move the entire workspace to the next monitor
-ctrl-alt-tab = [
-  'move-workspace-to-monitor --wrap-around next',
-  'exec-and-forget sketchybar --trigger aerospace_monitor_change TARGET_MONITOR=$(aerospace list-monitors --focused --format "%{monitor-appkit-nsscreen-screens-id}") FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused)',
-]
-
-# -- Service Mode (Hyper + ;) -------------------------------------------------
-# Enters a special binding mode for maintenance operations.
-cmd-alt-ctrl-shift-semicolon = 'mode service'
-
-# =============================================================================
-# KEYBINDINGS — Service Mode
-# =============================================================================
-# Active only after pressing Hyper + ;. Each action returns to main mode.
+    # Hyper (Caps Lock) shortcuts for common actions
+    ctrl-alt-shift-cmd-tab = 'workspace-back-and-forth'
+    ctrl-alt-shift-cmd-enter = 'fullscreen'
+    ctrl-alt-shift-cmd-f = 'macos-native-fullscreen'
+    ctrl-alt-shift-cmd-t = 'layout floating tiling'
+    ctrl-alt-shift-cmd-e = 'flatten-workspace-tree'
+    ctrl-alt-shift-cmd-semicolon = 'mode service'
 
 [mode.service.binding]
-# esc = reload AeroSpace config and return to main mode
-esc = ['reload-config', 'mode main']
-# r = flatten the workspace tree (reset broken layouts to a clean tiling grid)
-r = ['flatten-workspace-tree', 'mode main']
-# f = toggle the focused window between floating and tiling
-f = [
-  'layout floating tiling',
-  'mode main',
-]
-# backspace = close every window on this workspace except the focused one
-backspace = ['close-all-windows-but-current', 'mode main']
-
-# Join the focused window with an adjacent window into a new container.
-h = ['join-with left', 'mode main']
-j = ['join-with down', 'mode main']
-k = ['join-with up', 'mode main']
-l = ['join-with right', 'mode main']
-
-# -- Window Rules (auto-assign apps to monitors) -----------------------------
-
-[[on-window-detected]]
-if.app-id = 'com.mitchellh.ghostty'
-run = ['layout floating']
-
-[[on-window-detected]]
-if.app-id = 'com.apple.finder'
-run = 'move-node-to-workspace 4'
-
-[[on-window-detected]]
-if.app-id = 'de.tutao.tutanota'
-run = 'move-node-to-workspace 3'
-
-[[on-window-detected]]
-if.app-id = 'com.apple.Notes'
-run = 'move-node-to-workspace 4'
-
-[[on-window-detected]]
-if.app-id = 'dev.zed.Zed'
-run = 'move-node-to-workspace 2'
-
-# -- Float dialogs and utilities (these look bad tiled) -----------------------
+    esc = ['reload-config', 'mode main']
+    r = ['flatten-workspace-tree', 'mode main']
+    f = ['layout floating tiling', 'mode main']
+    backspace = ['close-all-windows-but-current', 'mode main']
+    alt-shift-h = ['join-with left', 'mode main']
+    alt-shift-j = ['join-with down', 'mode main']
+    alt-shift-k = ['join-with up', 'mode main']
+    alt-shift-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
 if.app-id = 'com.apple.systempreferences'
@@ -226,30 +111,83 @@ if.app-id = 'com.apple.calculator'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.ActivityMonitor'
+if.app-id = 'com.apple.finder'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.ScreenSharing'
+if.app-id = 'com.shottr.Shottr'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.apple.Passwords'
+if.app-id = 'com.raycast.macos'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.window-title-regex-substring = '[Pp]references'
+if.app-name-regex-substring = 'WhatsApp'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.window-title-regex-substring = '[Ss]ettings'
+if.app-id = 'us.zoom.xos'
+run = ['move-node-to-workspace 4', 'layout tiles']
+
+[[on-window-detected]]
+if.app-name-regex-substring = '(?i)zoom'
+run = ['move-node-to-workspace 4', 'layout tiles']
+
+[[on-window-detected]]
+if.app-id = 'app.zen-browser.zen'
+run = ['move-node-to-workspace 1']
+
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = ['move-node-to-workspace 1']
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = ['move-node-to-workspace 3']
+
+[[on-window-detected]]
+if.app-id = 'com.apple.mail'
+run = ['move-node-to-workspace 3']
+
+# Floating utilities — popups/small windows that tile awkwardly
+[[on-window-detected]]
+if.app-id = 'net.freemacsoft.AppCleaner'
 run = 'layout floating'
 
-# -- Shell Environment --------------------------------------------------------
-# Inherit the user's shell environment so scripts can find tools in /opt/homebrew
+[[on-window-detected]]
+if.app-id = 'com.bitwarden.desktop'
+run = 'layout floating'
 
-[exec]
-inherit-env-vars = true
+[[on-window-detected]]
+if.app-id = 'com.docker.docker'
+run = 'layout floating'
 
-[exec.env-vars]
-PATH = '/opt/homebrew/bin:/opt/homebrew/sbin:${PATH}'
+[[on-window-detected]]
+if.app-id = 'com.loom.desktop'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.onmyway133.PastePal'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.SFSymbols'
+run = 'layout floating'
+
+[[on-window-detected]]
+if.app-id = 'leits.MeetingBar'
+run = 'layout floating'
+
+# Pin to workspace 2 (scratch on external)
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+if.app-id = 'dev.zed.Zed'
+run = ['move-node-to-workspace 2']
+
+[[on-window-detected]]
+if.app-id = 'com.anthropic.claudefordesktop'
+run = ['move-node-to-workspace 2']

@@ -1,43 +1,30 @@
 #!/bin/bash
-# =============================================================================
-# space_windows.sh — Show/hide workspace indicators based on window state
-# =============================================================================
-# This plugin runs whenever:
-#   - You switch workspaces (aerospace_workspace_change)
-#   - You switch apps (front_app_switched)
-#   - A workspace moves to another monitor (aerospace_monitor_change)
-#
-# Its job: only show workspace indicators for workspaces that have windows,
-# plus always show the currently focused workspace.
-#
-# Environment variables (set by sketchybar event triggers):
-#   $SENDER            — which event triggered this script
-#   $FOCUSED_WORKSPACE — the workspace that just got focus
-#   $PREV_WORKSPACE    — the workspace we just left
-#   $TARGET_MONITOR    — (monitor change only) the monitor ID to display on
-# =============================================================================
 
-# -- Monitor change: no display reassignment needed (indicators show on all monitors)
-if [ "$SENDER" = "aerospace_monitor_change" ]; then
-  exit 0
+sleep 0.2
+
+# --- AeroSpace version ---
+AEROSPACE_PATH=$(command -v aerospace)
+ICON_MAP_PATH="$HOME/.config/sketchybar/plugins/icon_map.sh"
+if [ -z "$AEROSPACE_PATH" ]; then
+  [ -f "/opt/homebrew/bin/aerospace" ] && AEROSPACE_PATH="/opt/homebrew/bin/aerospace"
+  [ -f "/usr/local/bin/aerospace" ] && AEROSPACE_PATH="/usr/local/bin/aerospace"
 fi
 
-# -- Workspace change: show/hide the previous workspace indicator -------------
-if [ "$SENDER" = "aerospace_workspace_change" ]; then
-  # Check if the workspace we just left still has any windows
-  prevapps=$(aerospace list-windows --workspace "$PREV_WORKSPACE" | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
-  if [ "${prevapps}" != "" ]; then
-    # Still has windows — keep its indicator visible
-    sketchybar --set space.$PREV_WORKSPACE drawing=on
+for sid in 1 2 3 4; do
+  apps=$($AEROSPACE_PATH list-windows --workspace "$sid" --format "%{app-name}")
+  icon_strip=""
+  if [ -n "$apps" ]; then
+    while read -r app; do
+      if [ -n "$app" ]; then
+        icon=$($ICON_MAP_PATH "$app")
+        case "$icon_strip" in
+          *"$icon"*) ;;
+          *) icon_strip+=" $icon" ;;
+        esac
+      fi
+    done <<< "$apps"
   else
-    # Empty workspace — hide its indicator from the bar
-    sketchybar --set space.$PREV_WORKSPACE drawing=off
+    icon_strip=" —"
   fi
-else
-  # For non-workspace-change events (e.g., front_app_switched), we don't have
-  # $FOCUSED_WORKSPACE from the event, so query AeroSpace directly.
-  FOCUSED_WORKSPACE="$(aerospace list-workspaces --focused)"
-fi
-
-# Always show the currently focused workspace indicator
-sketchybar --set space.$FOCUSED_WORKSPACE drawing=on
+  sketchybar --set space.$sid label="$icon_strip"
+done

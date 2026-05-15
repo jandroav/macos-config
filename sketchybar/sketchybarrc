@@ -1,371 +1,203 @@
-# =============================================================================
-# Sketchybar — Custom macOS Status Bar
-# =============================================================================
-# Sketchybar replaces the default macOS menu bar with a fully customizable one.
-# This config defines the bar's appearance, all its items (widgets), and which
-# plugin scripts power them.
-#
-# The bar has three sections: left (workspaces + window title),
-# center (media playback), and right (system stats + clock).
-#
-# Theme: Catppuccin-inspired dark palette
-# Icon font: JetBrainsMono Nerd Font (search icons at nerdfonts.com/cheat-sheet)
-# =============================================================================
-
-# -- Bar Mode (compact vs normal) ---------------------------------------------
-# A file at $CONFIG_DIR/.bar_mode stores either "normal" or "compact".
-# Compact mode shrinks the bar height and icon sizes. Toggle it by clicking
-# the divider icon (chevron) between workspaces and the window title.
-
-if [ ! -f "$CONFIG_DIR/.bar_mode" ]; then
-    echo "normal" > "$CONFIG_DIR/.bar_mode"
-fi
-
-MODE=$(<"$CONFIG_DIR/.bar_mode")
-
-# Query AeroSpace for the currently focused workspace and its windows.
-# Used later to determine initial drawing state of workspace indicators.
-AEROSPACE_FOCUSED_MONITOR_NO=$(aerospace list-workspaces --focused)
-AEROSPACE_LIST_OF_WINDOWS_IN_FOCUSED_MONITOR=$(aerospace list-windows --workspace $AEROSPACE_FOCUSED_MONITOR_NO | awk -F'|' '{gsub(/^ *| *$/, "", $2); print $2}')
-
-# =============================================================================
-# BAR — Global bar appearance
-# =============================================================================
-# height: bar thickness in pixels (smaller in compact mode)
-# color: 0xAARRGGBB format (AA=alpha, fully opaque = ff)
-# position: top = bar at top of screen
-# shadow: subtle drop shadow below the bar
-
-sketchybar --bar height=$([ "$MODE" = "compact" ] && echo 22 || echo 45) \
-                 padding_left=$([ "$MODE" = "compact" ] && echo 0 || echo 4) \
-                 padding_right=$([ "$MODE" = "compact" ] && echo 0 || echo 4) \
-                 y_offset=0 \
-                 blur_radius=0 \
-                 position=top \
-                 margin=0 \
-                 corner_radius=0 \
-                 color=0xff1e1d2e \
-                 shadow=on
-
-# =============================================================================
-# GLOBAL DEFAULTS — Applied to all items unless overridden
-# =============================================================================
-# updates=when_shown: only run plugin scripts when the item is visible
-# icon.highlight_color: the color used when icon.highlight=on (for focused state)
-
-sketchybar --default updates=when_shown \
-                     icon.font="$([ "$MODE" = "compact" ] && echo "JetBrainsMono Nerd Font:Bold:14.0" || echo "JetBrainsMono Nerd Font:Bold:16.0")" \
-                     label.font="JetBrainsMono Nerd Font:Bold:16.0" \
-                     icon.color=0xffECEFF4 \
-                     icon.highlight_color=0xffE48FA8 \
-                     label.color=0xffECEFF4 \
-                     background.corner_radius=5 \
-                     background.height=30
-
-# =============================================================================
-# LEFT SIDE — Logo + Workspace Indicators + Window Title
-# =============================================================================
-
-# -- Apple-style logo (leftmost item) -----------------------------------------
-# Clicking it refreshes sketchybar. Teal background with dark icon.
-
-sketchybar --add item logo left \
-           --set logo icon= \
-                 icon.color=0xff010101 \
-                 icon.padding_left=16 \
-                 icon.padding_right=16 \
-                 background.color=0xffA5E0D5 \
-                 background.padding_right="$([ "$MODE" = "compact" ] && echo 0 || echo 8)" \
-                 background.padding_left="$([ "$MODE" = "compact" ] && echo 0 || echo 4)" \
-                 click_script="sketchybar --update"
-
-# -- Custom events from AeroSpace ---------------------------------------------
-# These events are fired by AeroSpace (via exec-on-workspace-change in
-# aerospace.toml) and by the alt-shift-tab keybinding. Plugins subscribe
-# to these events to react to workspace/monitor changes.
+PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 sketchybar --add event aerospace_workspace_change
-sketchybar --add event aerospace_monitor_change
 
-# -- Workspace indicators (one per AeroSpace workspace) -----------------------
-# Creates a clickable button for each workspace (1-10).
-# - display: which monitor to show this indicator on (matches the monitor where
-#   the workspace's windows live, so each monitor's bar shows only its workspaces)
-# - drawing=off: hidden by default, shown when the workspace has windows
-# - click_script: clicking switches to that workspace
-# - script: aerospace.sh highlights the focused workspace with a pink accent
+sketchybar --bar position=top \
+               height=43 \
+               blur_radius=30 \
+               color=0x00000000 \
+               display=all \
+               topmost=window \
+               margin_left=8 \
+               margin_right=8 
 
-for sid in $(aerospace list-workspaces --all); do
-    sketchybar --add item space.$sid left \
-        --subscribe space.$sid aerospace_workspace_change \
-        --set space.$sid \
-        drawing=off \
-        icon="$sid" \
-        icon.highlight_color=0xffE48FA8 \
-        icon.padding_left=20 \
-        icon.padding_right=20 \
-        background.color=0xff3C3E4F \
-        background.padding_left=-4 \
-        background.padding_right=-4 \
-        background.drawing=on \
-        label.drawing=off \
-        click_script="aerospace workspace $sid" \
-        script="$CONFIG_DIR/plugins/aerospace.sh $sid"
+sketchybar --default \
+           padding_left=4 \
+           padding_right=4 \
+           icon.font="SF Pro:Bold:16.0" \
+           label.font="JetBrainsMono Nerd Font:Bold:14.0" \
+           icon.color=0xffffc799 \
+           label.color=0xffffc799 \
+           icon.padding_left=10 \
+           icon.padding_right=4 \
+           label.padding_left=6 \
+           label.padding_right=10 \
+           background.color=0xcc101010 \
+           background.border_color=0x44ffc799 \
+           background.border_width=1 \
+           background.corner_radius=8 \
+           background.height=30 \
+           blur_radius=30
+
+sketchybar --add item date right \
+            --set date icon=􀧞 \
+                       icon.color=0xffffc799 \
+                       label.color=0xffffffff \
+                        update_freq=5 \
+                       script="$PLUGIN_DIR/calendar.sh" \
+                       popup.align=center \
+                       popup.y_offset=-2 \
+                       popup.background.color=0xcc101010 \
+                       popup.background.border_color=0x44ffc799 \
+                       popup.background.border_width=1 \
+                       popup.background.corner_radius=10 \
+popup.width=180 \
+             --subscribe date mouse.clicked \
+             --add item date.wifi popup.date \
+             --set date.wifi icon=󰤨 \
+                             icon.color=0xffffc799 \
+                             icon.padding_left=10 \
+                             label.color=0xffffffff \
+                             label.font="JetBrainsMono Nerd Font:Bold:13.0" \
+                             label.width=220 \
+                             label.padding_right=10 \
+                             background.drawing=off \
+             --add item date.band popup.date \
+            --set date.band icon=󰖩 \
+                            icon.color=0xffffc799 \
+                            icon.padding_left=10 \
+                            label.color=0xffffffff \
+                            label.font="JetBrainsMono Nerd Font:Bold:13.0" \
+                            label.width=220 \
+                            label.padding_right=10 \
+                            background.drawing=off \
+            --add item date.vpn popup.date \
+            --set date.vpn icon=󰒝 \
+                            icon.color=0xffffc799 \
+                            icon.padding_left=10 \
+                            label.color=0xffffffff \
+                            label.font="JetBrainsMono Nerd Font:Bold:13.0" \
+                            label.width=220 \
+label.padding_right=10 \
+                             background.drawing=off \
+             --add item date.uptime popup.date \
+             --set date.uptime icon=􀐫 \
+                             icon.color=0xffffc799 \
+                             icon.padding_left=10 \
+                             label.color=0xffffffff \
+                             label.font="JetBrainsMono Nerd Font:Bold:13.0" \
+                             label.width=220 \
+                             label.padding_right=10 \
+                             background.drawing=off \
+
+sketchybar --add item battery right \
+           --set battery icon.color=0xffffc799 \
+                         label.color=0xffffffff \
+                         update_freq=10 \
+                         script="$PLUGIN_DIR/battery.sh" \
+           --subscribe battery system_woke power_source_change mouse.clicked
+
+sketchybar --add item mem right \
+           --set mem icon.color=0xffffc799 \
+                     label.color=0xffffffff \
+                     update_freq=5 \
+                     script="$PLUGIN_DIR/mem.sh"
+
+sketchybar --add item cpu right \
+           --set cpu icon.color=0xffffc799 \
+                     label.color=0xffffffff \
+                     update_freq=2 \
+                     script="$PLUGIN_DIR/cpu.sh"
+
+sketchybar --add item volume_icon right \
+           --set volume_icon icon.color=0xffffc799 \
+                         label.color=0xffffffff \
+                         script="$PLUGIN_DIR/volume.sh" \
+                         popup.align=center \
+                         popup.background.color=0xcc101010 \
+                         popup.background.border_color=0x44ffc799 \
+                         popup.background.border_width=1 \
+                         popup.background.corner_radius=6 \
+                         popup.background.height=18 \
+                         popup.y_offset=-2 \
+           --subscribe volume_icon volume_change mouse.clicked \
+             --add slider volume_slider popup.volume_icon \
+             --set volume_slider slider.width=150 \
+                                 slider.background.height=4 \
+                                 slider.background.corner_radius=2 \
+                                 slider.background.color=0xff1c1c1c \
+                                 slider.highlight_color=0xffffc799 \
+                                 slider.knob=􀀁 \
+                                 background.drawing=off \
+                                 background.height=2 \
+                                 padding_left=10 \
+                                 padding_right=10 \
+                                 script="$PLUGIN_DIR/volume.sh" \
+             --subscribe volume_slider volume_change mouse.clicked mouse.entered mouse.exited
+
+source "$CONFIG_DIR/items/media.sh"
+
+# --- Space Indicators ---
+# [Yabai version] - DISABLED
+# SPACE_SIDS=(1 2 3 4 5 6 7 8 9 10)
+# for sid in "${SPACE_SIDS[@]}"; do
+#   sketchybar --add space space.$sid left \
+#              --set space.$sid \
+#                       space=$sid \
+#                       icon=$sid \
+#                       label.font="sketchybar-app-font:Regular:18.0" \
+#                       label.padding_right=20 \
+#                       label.y_offset=-2 \
+#                       label.color=0xffffc799 \
+#                       icon.color=0xffffc799 \
+#                       background.color=0xcc101010 \
+#                       background.border_color=0x44ffc799 \
+#                       background.border_width=1 \
+#                       script="$PLUGIN_DIR/space.sh"
+# done
+
+# Space indicators (for aerospace)
+SPACE_SIDS=(1 2 3 4)
+for sid in "${SPACE_SIDS[@]}"; do
+  sketchybar --add item space.$sid left \
+             --set space.$sid \
+                     icon=$sid \
+                     label.font="sketchybar-app-font:Regular:18.0" \
+                     label.padding_right=20 \
+                     label.y_offset=-2 \
+                     label.color=0xffffc799 \
+                     icon.color=0xffffc799 \
+                     background.color=0xcc101010 \
+                     background.border_color=0x44ffc799 \
+                     background.border_width=1 \
+                     script="$PLUGIN_DIR/space.sh" \
+                     click_script="aerospace workspace $sid" \
+             --subscribe space.$sid aerospace_workspace_change front_app_switched
 done
 
-# -- Standalone workspace updater ----------------------------------------------
-# An invisible item that runs update_workspaces.sh on every workspace change.
-# This does a full scan of all workspaces across all monitors and ensures
-# drawing=on/off is correct for each one (catches edge cases the per-workspace
-# scripts might miss).
+sketchybar --add item space_watcher center \
+           --set space_watcher background.drawing=off \
+                                 script="$PLUGIN_DIR/space_windows.sh" \
+           --subscribe space_watcher space_windows_change space_change
 
-sketchybar --add item standalone_item left \
-    --subscribe standalone_item aerospace_workspace_change \
-    --set standalone_item \
-        label="" \
-        label.drawing=off \
-        script="$CONFIG_DIR/plugins/update_workspaces.sh"
+sketchybar --add item front_app left \
+           --set front_app icon.font="sketchybar-app-font:Regular:18.0" \
+                           icon.color=0xffffc799 \
+                           label.color=0xffffffff \
+                           background.color=0xcc1c1c1c \
+                           background.border_color=0x88ffc799 \
+                           background.border_width=1 \
+                           script="$PLUGIN_DIR/front_app.sh" \
+           --subscribe front_app front_app_switched
 
-# -- Space separator (runs space_windows.sh) -----------------------------------
-# Another invisible item. Its plugin (space_windows.sh) handles:
-# 1. Showing/hiding workspace indicators when windows open/close
-# 2. Moving workspace indicators between monitors when workspaces move
-# Subscribes to workspace changes, app switches, and monitor changes.
+sketchybar --add item meeting left \
+           --set meeting icon.color=0xffffc799 \
+                         label.color=0xffffffff \
+                         background.color=0xcc1c1c1c \
+                         background.border_color=0x88ffc799 \
+                         background.border_width=1 \
+                         update_freq=60 \
+                         script="$PLUGIN_DIR/meeting.sh" \
+                         click_script='[ -f /tmp/sketchybar_meeting_url ] && open "$(cat /tmp/sketchybar_meeting_url)"' \
+           --subscribe meeting mouse.clicked
 
-sketchybar --add item space_separator left \
-    --set space_separator \
-        label.drawing=off \
-        background.drawing=off \
-        script="$CONFIG_DIR/plugins/space_windows.sh" \
-    --subscribe space_separator aerospace_workspace_change front_app_switched space_windows_change aerospace_monitor_change
 
-# -- Divider (clickable chevron between workspaces and window title) -----------
-# Clicking this toggles between normal and compact bar mode.
-# Blue chevron icon (>) as a visual separator.
+# --- Yabai signals --- DISABLED
+# yabai -m signal --add event=window_focused ...
+# yabai -m signal --add event=space_changed ...
+# (rest of yabai signals removed — using AeroSpace events instead)
 
-sketchybar --add item space_divider left \
-           --set space_divider icon= \
-                                 background.padding_left=23 \
-                                 background.padding_right=23 \
-                                 label.drawing=off \
-                                 icon.color=0xff92B3F5 \
-                                 click_script="$CONFIG_DIR/toggle_bar_mode.sh"
-
-# -- Window title (shows the name of the focused app) -------------------------
-# Updates on front_app_switched (whenever you focus a different app).
-# Purple-blue text, no icon.
-
-sketchybar --add item window_title left \
-           --set window_title    script="~/.config/sketchybar/plugins/window_title.sh" \
-                                 icon.drawing=off \
-                                 label.color=0xffb7bdf4 \
-           --subscribe window_title front_app_switched
-
-# =============================================================================
-# ITEM DEFAULTS — Updated defaults for center and right items
-# =============================================================================
-# These override the global defaults above. Mainly adjusts padding and icon size
-# for the system-info widgets on the right side.
-
-sketchybar --default label.padding_left=6 \
-                     label.padding_right="$([ "$MODE" = "compact" ] && echo 8 || echo 6)" \
-                     icon.padding_left=6 \
-                     icon.padding_right=6 \
-                     icon.font="$([ "$MODE" = "compact" ] && echo "JetBrainsMono Nerd Font:Bold:14.0" || echo "JetBrainsMono Nerd Font:Bold:20.0")" \
-                     background.height=30 \
-                     background.padding_left="$([ "$MODE" = "compact" ] && echo 0 || echo 4)" \
-                     background.padding_right="$([ "$MODE" = "compact" ] && echo 0 || echo 4)" \
-                     background.corner_radius=5
-
-# =============================================================================
-# CENTER — Media Playback
-# =============================================================================
-# Two media sources are shown: Spotify (dedicated) and system media (everything
-# else like YouTube, Apple Music, etc). Each has a logo item + data item pair.
-
-# -- Spotify ------------------------------------------------------------------
-# spot_logo: purple  icon, always shown
-# spot: updates every 1s, shows "Track - Artist" when Spotify is playing
-
-sketchybar --add item spot_logo left \
-           --set spot_logo icon=󰓇 \
-                           label.drawing=off \
-                           icon.color=0xff121219 \
-                           background.color=0xffEDC4E5 \
-                           background.padding_left=15
-
-sketchybar --add item spot left \
-           --set spot update_freq=1 \
-                      icon.drawing=off \
-                      updates=on \
-                      scroll_texts=on \
-                      label.max_chars=40 \
-                      label.scroll_duration=200 \
-                      script="~/.config/sketchybar/plugins/spotifyIndicator.sh" \
-                      background.color=0xff3C3E4F \
-                      background.padding_left=0
-
-# -- System media (non-Spotify) -----------------------------------------------
-# media_logo: pink  icon
-# media: updates every 3s, shows playback from any app except Spotify
-#        (to avoid duplicate display). Uses nowplaying-cli.
-
-sketchybar --add item media_logo left \
-           --set media_logo icon=󰎆 \
-                           label.drawing=off \
-                           icon.color=0xff11111b \
-                           background.color=0xfff5c2e7 \
-                           background.padding_left=15
-
-sketchybar --add item media left \
-           --set media update_freq=3 \
-                      icon.drawing=off \
-                      updates=on \
-                      scroll_texts=on \
-                      label.max_chars=40 \
-                      label.scroll_duration=200 \
-                      script="$CONFIG_DIR/plugins/media.sh" \
-                      background.color=0xff3C3E4F \
-                      background.padding_left=0
-
-# =============================================================================
-# RIGHT SIDE — System Stats + Clock
-# =============================================================================
-# Items are added right-to-left (first added = rightmost).
-# Each widget is a pair: a data item (label with the value) + a logo item
-# (colored icon badge). The logo sits to the right of its data.
-#
-# Layout (left to right on screen):
-# [pressure][pressure_logo] [temp][temp_logo] [disk][disk_logo]
-# [cpu_ram][cpu_ram_logo] [battery][power_logo] [date][clock_logo] [time][time_logo]
-
-# -- Time (HH:MM) -------------------------------------------------------------
-sketchybar --add item time right \
-           --set time update_freq=1 \
-                      icon.drawing=off \
-                      script="~/.config/sketchybar/plugins/time.sh" \
-                      background.color=0xff3C3E4F \
-                      background.padding_left=0 \
-                      background.padding_right="$([ "$MODE" = "compact" ] && echo 0 || echo 10)"
-
-sketchybar --add item time_logo right\
-           --set time_logo icon=󰅐 \
-                           label.drawing=off \
-                           icon.color=0xff121219 \
-                           label.drawing=off \
-                           background.color=0xffF5E3B5
-
-# -- Date (YYYY-MM-DD) --------------------------------------------------------
-sketchybar --add item date right \
-           --set date update_freq=1000 \
-                      icon.drawing=off \
-                      script="~/.config/sketchybar/plugins/date.sh" \
-                      background.color=0xff3C3E4F \
-                      background.padding_left=0
-
-sketchybar --add item clock_logo right\
-           --set clock_logo icon=󰃭 \
-                            icon.color=0xff121219\
-                            label.drawing=off \
-                            background.color=0xff92B3F5
-
-# -- Battery -------------------------------------------------------------------
-sketchybar --add item battery right \
-           --set battery update_freq=3 \
-                         icon.drawing=off \
-                         script="~/.config/sketchybar/plugins/power.sh" \
-                         background.color=0xff3C3E4F \
-                         background.padding_left=0
-
-sketchybar --add item power_logo right \
-           --set power_logo icon=󰈸 \
-                 icon.color=0xff121219 \
-                 label.drawing=off \
-                 background.color=0xffB3E1A7
-
-# -- CPU & RAM -----------------------------------------------------------------
-# Shows "CPU% RAM_GB" (e.g., "12% 8.3G"). Updates every 5 seconds.
-sketchybar --add item cpu_ram right \
-           --set cpu_ram update_freq=5 \
-                     icon.drawing=off \
-                     script="$CONFIG_DIR/plugins/cpu_ram.sh" \
-                     background.color=0xff3C3E4F \
-                     background.padding_left=0
-
-sketchybar --add item cpu_ram_logo right \
-           --set cpu_ram_logo icon=󰍛 \
-                     icon.color=0xff11111b \
-                     label.drawing=off \
-                     background.color=0xffb4befe
-
-# -- Disk Usage ----------------------------------------------------------------
-# Shows "Used/Total" (e.g., "187G/460G"). Updates every 60 seconds.
-sketchybar --add item disk right \
-           --set disk update_freq=60 \
-                     icon.drawing=off \
-                     script="$CONFIG_DIR/plugins/disk.sh" \
-                     background.color=0xff3C3E4F \
-                     background.padding_left=0
-
-sketchybar --add item disk_logo right \
-           --set disk_logo icon=󰋊 \
-                     icon.color=0xff11111b \
-                     label.drawing=off \
-                     background.color=0xfffab387
-
-# -- Temperature ---------------------------------------------------------------
-# Average CPU/SoC temperature in Celsius. Uses a custom macos-temp-tool binary
-# that reads Apple's thermal sensors. Updates every 1 second.
-sketchybar --add item temp right \
-           --set temp update_freq=1 \
-                     script="~/.config/sketchybar/plugins/temp.sh" \
-                     icon.drawing=off \
-                     background.color=0xff3C3E4F \
-                     background.padding_left=0
-
-sketchybar --add item temp_logo right \
-           --set temp_logo icon=󰔏 \
-                     icon.color=0xff121219\
-                     label.drawing=off \
-                     background.color=0xffE0A3AD
-
-# -- Thermal Pressure ----------------------------------------------------------
-# macOS thermal pressure level (Nominal/Moderate/Heavy/Critical/Trapping).
-# Indicates whether the system is thermally throttling. Updates every 60 seconds.
-sketchybar --add item pressure right \
-           --set pressure update_freq=60 \
-                     script="~/.config/sketchybar/plugins/pressure.sh" \
-                     icon.drawing=off \
-                     background.color=0xff3C3E4F \
-                     background.padding_left=0
-
-sketchybar --add item pressure_logo right \
-           --set pressure_logo icon=󰈸\
-                     icon.color=0xff121219\
-                     label.drawing=off \
-                     background.color=0xff94E2D5
-
-# =============================================================================
-# FINALIZE — Apply all settings and sync with AeroSpace
-# =============================================================================
+# --- AeroSpace logic ---
+sketchybar --trigger aerospace_workspace_change FOCUSED_WORKSPACE=$(aerospace list-workspaces --focused)
 
 sketchybar --update
-
-# -- Dynamic gap adjustment ----------------------------------------------------
-# The top gap in AeroSpace needs to match the bar height so windows don't
-# overlap the bar. Compact mode uses a shorter bar, so the gap is smaller.
-# This writes a processed aerospace.toml from the template, replacing the
-# {{OUTER_TOP}} placeholder with the correct per-monitor gap values.
-
-if [ "$MODE" = "compact" ]; then
-  TOP='[{ monitor."Built-in" = 4 }, 36]'
-else
-  TOP='[{ monitor."Built-in" = 25 }, 60]'
-fi
-
-sed "s|{{OUTER_TOP}}|$TOP|" ~/.config/aerospace/aerospace.template.toml > ~/.config/aerospace/aerospace.toml
-
-# Reload AeroSpace so it picks up the new gap values
-aerospace reload-config
-
-echo "sketchybar configuration loaded..."
