@@ -1,4 +1,5 @@
 #!/bin/bash
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 
 URL_CACHE="/tmp/sketchybar_meeting_url"
 

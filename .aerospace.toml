@@ -1,8 +1,8 @@
 config-version = 2
 after-startup-command = [
-    'exec-and-forget ~/.config/borders/bordersrc',
-    'exec-and-forget sketchybar',
-    'exec-and-forget ~/.config/sketchybar/plugins/space_windows.sh'
+    'exec-and-forget /bin/bash -lc "~/.config/borders/bordersrc"',
+    'exec-and-forget /opt/homebrew/bin/sketchybar',
+    'exec-and-forget /bin/bash -lc "~/.config/sketchybar/plugins/space_windows.sh"'
 ]
 start-at-login = true
 enable-normalization-flatten-containers = true

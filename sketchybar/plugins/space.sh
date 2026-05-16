@@ -1,4 +1,5 @@
 #!/bin/sh
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 
 # --- AeroSpace version ---
 FOCUSED_WORKSPACE="${FOCUSED_WORKSPACE:-$(aerospace list-workspaces --focused)}"

@@ -1,4 +1,5 @@
 #!/bin/bash
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 borders \
     active_color=0xffffc799 \
     inactive_color=0xff404040 \
