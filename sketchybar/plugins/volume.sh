@@ -1,18 +1,47 @@
 #!/bin/bash
+export PATH="/opt/homebrew/bin:/usr/local/bin:$PATH"
 
 # This script handles volume updates and slider interactions.
 
-volume_change() {
-  if [ "$INFO" -eq "0" ]; then
-    ICON="􀊣"
-  elif (( INFO > 0 && INFO <= 29 )); then
-    ICON="􀊥"
-  elif (( INFO >= 30 && INFO <= 69 )); then
-    ICON="􀊧"
-  else
-    ICON="􀊩"
-  fi
+# Returns 0 if current output is headphones / external (not built-in speakers)
+is_headphones() {
+  local out
+  out=$(SwitchAudioSource -c 2>/dev/null)
+  [ -z "$out" ] && return 1
+  case "$out" in
+    *"MacBook"*|*"Built-in"*|*"Internal"*|*"Speakers"*)
+      return 1
+      ;;
+    *)
+      return 0
+      ;;
+  esac
+}
 
+# Pick icon based on volume level AND output device
+pick_icon() {
+  local vol="$1"
+  if is_headphones; then
+    if [ "$vol" -eq "0" ]; then
+      echo "􀑈"   # headphones (muted — same glyph; system has no slashed variant)
+    else
+      echo "􀑈"   # headphones
+    fi
+    return
+  fi
+  if [ "$vol" -eq "0" ]; then
+    echo "􀊣"
+  elif (( vol > 0 && vol <= 29 )); then
+    echo "􀊥"
+  elif (( vol >= 30 && vol <= 69 )); then
+    echo "􀊧"
+  else
+    echo "􀊩"
+  fi
+}
+
+volume_change() {
+  ICON=$(pick_icon "$INFO")
   sketchybar --set volume_icon label="$INFO%" icon="$ICON" \
              --set volume_slider slider.percentage=$INFO
 }
@@ -33,60 +62,40 @@ mouse_clicked() {
     sketchybar --set volume_icon popup.drawing=off \
                --set volume_slider slider.knob.drawing=off
   else
-    # Call show_popup to display for 2 seconds and update icon
     show_popup
     sketchybar --set volume_slider slider.knob.drawing=on
   fi
 }
 
-# Handle real-time slider drag tracking
 monitor_slider_drag() {
   local last_percentage=-1
   local idle_count=0
-  
+
   while true; do
     local current_percentage=$(sketchybar --query volume_slider 2>/dev/null | jq -r ".slider.percentage" 2>/dev/null)
-    
-    # Validate the percentage value
+
     if [ -z "$current_percentage" ] || [ "$current_percentage" = "null" ]; then
       sleep 0.2
       continue
     fi
-    
-    # Only update if percentage actually changed
+
     if [ "$current_percentage" != "$last_percentage" ]; then
       local int_percentage=$(printf "%.0f" "$current_percentage")
-      
-      # Clamp percentage between 0-100
+
       if (( int_percentage < 0 )); then
         int_percentage=0
       elif (( int_percentage > 100 )); then
         int_percentage=100
       fi
-      
-      # Set volume and update display atomically
+
       osascript -e "set volume output volume $int_percentage" 2>/dev/null
-      
-      # Determine icon based on volume level
-      if [ "$int_percentage" -eq "0" ]; then
-        ICON="􀊣"
-      elif (( int_percentage > 0 && int_percentage <= 29 )); then
-        ICON="􀊥"
-      elif (( int_percentage >= 30 && int_percentage <= 69 )); then
-        ICON="􀊧"
-      else
-        ICON="􀊩"
-      fi
-      
-      # Update UI
+
+      ICON=$(pick_icon "$int_percentage")
       sketchybar --set volume_icon label="$int_percentage%" icon="$ICON" 2>/dev/null
       last_percentage=$current_percentage
       idle_count=0
     else
-      # If no change detected, increase idle counter
       ((idle_count++))
-      
-      # If idle for too long, increase sleep interval (adaptive polling)
       if [ $idle_count -gt 3 ]; then
         sleep 0.3
       else
@@ -94,7 +103,7 @@ monitor_slider_drag() {
       fi
       continue
     fi
-    
+
     sleep 0.1
   done
 }
@@ -102,7 +111,6 @@ monitor_slider_drag() {
 case "$SENDER" in
   "mouse.clicked")
     if [ "$NAME" = "volume_slider" ]; then
-      # Handle slider clicks/drags - PERCENTAGE is available on click
       if [ -n "$PERCENTAGE" ]; then
         PERCENTAGE=$(printf "%.0f" "$PERCENTAGE")
         if (( PERCENTAGE < 0 )); then
@@ -111,11 +119,11 @@ case "$SENDER" in
           PERCENTAGE=100
         fi
         osascript -e "set volume output volume $PERCENTAGE"
-        sketchybar --set volume_icon label="$PERCENTAGE%"
+        ICON=$(pick_icon "$PERCENTAGE")
+        sketchybar --set volume_icon label="$PERCENTAGE%" icon="$ICON"
         show_popup
       fi
     elif [ "$NAME" = "volume_icon" ]; then
-      # Handle clicks on volume_icon
       mouse_clicked
     fi
   ;;
@@ -123,16 +131,22 @@ case "$SENDER" in
   ;;
   "mouse.entered")
     sketchybar --set volume_slider slider.knob.drawing=on
-    # Start monitoring slider drag in background
     monitor_slider_drag &
     echo $! > /tmp/sketchybar_volume_monitor.pid
   ;;
   "mouse.exited")
     sketchybar --set volume_slider slider.knob.drawing=off
-    # Stop monitoring
     if [ -f /tmp/sketchybar_volume_monitor.pid ]; then
       kill $(cat /tmp/sketchybar_volume_monitor.pid) 2>/dev/null
       rm /tmp/sketchybar_volume_monitor.pid
+    fi
+  ;;
+  *)
+    # Periodic refresh — re-detect device + repaint icon
+    CURRENT=$(osascript -e "output volume of (get volume settings)" 2>/dev/null)
+    if [ -n "$CURRENT" ] && [ "$CURRENT" != "missing value" ]; then
+      ICON=$(pick_icon "$CURRENT")
+      sketchybar --set volume_icon label="${CURRENT}%" icon="$ICON"
     fi
   ;;
 esac
