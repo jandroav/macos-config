@@ -102,7 +102,7 @@ sketchybar --add item cpu right \
 sketchybar --add item volume_icon right \
            --set volume_icon icon.color=0xffffc799 \
                          label.color=0xffffffff \
-                         update_freq=10 \
+                         update_freq=2 \
                          script="$PLUGIN_DIR/volume.sh" \
                          popup.align=center \
                          popup.background.color=0xcc101010 \
